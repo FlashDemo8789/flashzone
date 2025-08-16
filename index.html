@@ -368,12 +368,12 @@
             font-size: 13px;
             font-weight: 400;
             color: rgba(0, 0, 0, 0.7);
-            animation: feedScroll 120s linear infinite;
+            animation: feedScroll 180s linear infinite;
         }
 
         @keyframes feedScroll {
             from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
+            to { transform: translateX(-200%); }
         }
 
         /* Side Panels */
@@ -584,7 +584,15 @@
     <!-- Intelligence Feed -->
     <div class="intelligence-feed">
         <div class="feed-content" id="feedContent">
-            Pattern Match: 87% similarity to Series A trajectory • Burn efficiency: 0.8x multiple achieved • Network effects accelerating at 2.3x rate • TAM capture: 0.3% growing 15% MoM • Stage-weighted scoring active • Variance factor: 1.2 applied • 126 metrics analyzed: Capital 31, Advantage 32, Market 32, People 31 • Fundability: Top 15% percentile • 10,000+ patterns matched • 17 ML models consensus: moderate-high potential
+            🔍 Pattern detected: "Reverse Marketplace" matching Airbnb 2008 trajectory (92% confidence) • 
+            💡 CloudSync pivoted to vertical AI, +300% growth in 8 weeks • 
+            📈 DataForge reached $1M ARR using "Land & Expand" pattern from Slack 2014 • 
+            ⚠️ Warning: "Vanity Metrics Mirage" pattern active in 3 EdTech startups this week • 
+            🎯 NeuralAPI matched "API-First Growth" pattern → $12M Series A in 6 months • 
+            🔄 PayFlow following Stripe's "Developer Love" playbook (week 14 of 52) • 
+            📊 "Burn Multiple Recovery" pattern: 8 companies reduced burn by 40% using our framework • 
+            🚀 FleetOS exit to Google matched our "Strategic Acquihire" prediction (87% accuracy) • 
+            💰 Pattern success: Companies using "PLG with Enterprise Catch" raising 2.3x faster
         </div>
     </div>
 
@@ -900,6 +908,61 @@
                 addThresholdPulse();
             }
         }, 10000); // Every 10 seconds
+        
+        // Dynamic feed content updates
+        const feedStories = [
+            [
+                '🔍 Pattern detected: "Reverse Marketplace" matching Airbnb 2008 trajectory (92% confidence)',
+                '💡 CloudSync pivoted to vertical AI, +300% growth in 8 weeks',
+                '📈 DataForge reached $1M ARR using "Land & Expand" pattern from Slack 2014',
+                '⚠️ Warning: "Vanity Metrics Mirage" pattern active in 3 EdTech startups this week',
+                '🎯 NeuralAPI matched "API-First Growth" pattern → $12M Series A in 6 months',
+                '🔄 PayFlow following Stripe\'s "Developer Love" playbook (week 14 of 52)',
+                '📊 "Burn Multiple Recovery" pattern: 8 companies reduced burn by 40% using our framework',
+                '🚀 FleetOS exit to Google matched our "Strategic Acquihire" prediction (87% accuracy)',
+                '💰 Pattern success: Companies using "PLG with Enterprise Catch" raising 2.3x faster'
+            ],
+            [
+                '🎯 Pattern match: "Bottom-Up SaaS" detected in 12 new startups this month',
+                '⚡ QuickBase burned $30k for 18 months, then hit $5M ARR (matches Basecamp 2004)',
+                '🔮 Predicted: 3 marketplace startups will pivot to SaaS within 60 days (78% confidence)',
+                '💎 "Product-Led Growth" pattern succeeding in 73% of dev tool startups',
+                '🏆 TeamSync matched Notion\'s 2018 trajectory → funded in 4 months',
+                '📱 "Mobile-First B2B" pattern emerging: 5x higher engagement than web-first',
+                '🎨 DesignHub following Figma\'s collaborative playbook (month 8 of 36)',
+                '⚙️ "Infrastructure Play" pattern: 15 startups building AI tooling layers',
+                '✨ Success story: CodeFlow used our "Open Source to Enterprise" pattern → $8M seed'
+            ],
+            [
+                '🚨 Alert: "Premature Scaling" pattern detected in 4 Series A companies',
+                '🎯 StreamCore matched Twitch 2011 metrics → acquisition interest from 3 companies',
+                '🔬 "Deep Tech Commercialization" pattern active in 8 biotech startups',
+                '💪 Survivor story: ByteStack cut burn 60% using "Default Alive" framework',
+                '🌟 "Creator Economy Infrastructure" pattern showing 85% funding success rate',
+                '📈 Growth hack: 6 companies using "Fake Door Testing" validated features in days',
+                '🎮 GameAPI following Unity\'s B2D2C model (quarter 3 of 12)',
+                '🏗️ "Vertical SaaS Roll-up" pattern: 4 companies acquiring competitors pre-Series B',
+                '🔥 Hot pattern: "AI Wrapper to Platform" journey matching Jasper.ai trajectory'
+            ]
+        ];
+        
+        let currentFeedSet = 0;
+        
+        function updateFeed() {
+            const feedContent = document.getElementById('feedContent');
+            currentFeedSet = (currentFeedSet + 1) % feedStories.length;
+            const newContent = feedStories[currentFeedSet].join(' • ');
+            
+            // Smooth transition
+            feedContent.style.opacity = '0.5';
+            setTimeout(() => {
+                feedContent.textContent = newContent;
+                feedContent.style.opacity = '1';
+            }, 500);
+        }
+        
+        // Update feed every 3 minutes
+        setInterval(updateFeed, 180000);
 
         // Portal interaction
         const portals = document.querySelectorAll('.portal');
