@@ -456,6 +456,36 @@
             color: rgba(0, 0, 0, 0.4);
             z-index: 60;
         }
+        
+        .metric-status {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: rgba(0, 0, 0, 0.5);
+            text-transform: none;
+        }
+        
+        .metric-status.pulse {
+            animation: subtlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .metric-status.analyzing .dots {
+            display: inline-block;
+            animation: ellipsis 2s infinite;
+        }
+        
+        @keyframes ellipsis {
+            0% { opacity: 0; }
+            25% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            75% { opacity: 1; }
+            100% { opacity: 0; }
+        }
 
         .corner-metric.top-right {
             top: 40px;
@@ -598,13 +628,11 @@
 
     <!-- Corner Metrics -->
     <div class="corner-metric top-right">
-        <span class="metric-value" id="activeInvestments">247</span>
-        <div class="metric-label">Active Investments</div>
+        <div class="metric-status pulse">Intelligence Engine Active</div>
     </div>
 
     <div class="corner-metric bottom-left">
-        <span class="metric-value" id="successRate">72%</span>
-        <div class="metric-label">Success Rate</div>
+        <div class="metric-status analyzing">Patterns Analyzing<span class="dots">...</span></div>
     </div>
 
     <div class="corner-metric bottom-right">
@@ -823,21 +851,7 @@
         // Periodic updates
         setInterval(animateCAMP, 5000);
 
-        // Corner metrics animation
-        function updateCornerMetrics() {
-            const activeInvestments = document.getElementById('activeInvestments');
-            const successRate = document.getElementById('successRate');
-            
-            const currentInvestments = parseInt(activeInvestments.textContent);
-            const newInvestments = currentInvestments + Math.floor(Math.random() * 6 - 3);
-            activeInvestments.textContent = Math.max(240, newInvestments);
-            
-            const currentRate = parseInt(successRate.textContent);
-            const newRate = currentRate + Math.floor(Math.random() * 4 - 2);
-            successRate.textContent = Math.max(65, Math.min(80, newRate)) + '%';
-        }
-
-        setInterval(updateCornerMetrics, 8000);
+        // Status indicators (no fake metrics to update)
 
         // Sector heat map animation
         function updateSectorBars() {
