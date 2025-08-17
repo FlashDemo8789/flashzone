@@ -216,6 +216,8 @@
             text-transform: uppercase;
             color: rgba(0, 0, 0, 0.5);
             margin-top: 5px;
+            transition: opacity 0.5s ease;
+            min-height: 12px;
         }
 
         /* Hover Effects */
@@ -783,7 +785,7 @@
                 <div class="center-point"></div>
                 <div class="portal-label">
                     Fund
-                    <div class="portal-sublabel">Capital Markets</div>
+                    <div class="portal-sublabel" id="fund-sublabel">Pre-Seed to Series A</div>
                 </div>
             </a>
 
@@ -795,7 +797,7 @@
                 <div class="center-point"></div>
                 <div class="portal-label">
                     Intelligence
-                    <div class="portal-sublabel">Market Analysis</div>
+                    <div class="portal-sublabel" id="intelligence-sublabel">Pattern Recognition Engine</div>
                 </div>
             </a>
         </div>
@@ -968,6 +970,49 @@
         
         // Update predictions every 15 seconds
         setInterval(updatePredictions, 15000);
+        
+        // Portal sublabel rotation
+        const fundSublabels = [
+            'Pre-Seed to Series A',
+            'Founder-First Capital',
+            'Pattern-Driven Investing',
+            'Early Stage Ventures'
+        ];
+        
+        const intelligenceSublabels = [
+            'Pattern Recognition Engine',
+            '126-Dimension Analysis',
+            'Startup Success Prediction'
+        ];
+        
+        let sublabelIndex = 0;
+        
+        function rotateSublabels() {
+            const fundSublabel = document.getElementById('fund-sublabel');
+            const intelligenceSublabel = document.getElementById('intelligence-sublabel');
+            
+            // Fade out
+            fundSublabel.style.opacity = '0';
+            intelligenceSublabel.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Update text
+                sublabelIndex = (sublabelIndex + 1) % Math.max(fundSublabels.length, intelligenceSublabels.length);
+                
+                fundSublabel.textContent = fundSublabels[sublabelIndex % fundSublabels.length];
+                intelligenceSublabel.textContent = intelligenceSublabels[sublabelIndex % intelligenceSublabels.length];
+                
+                // Fade in
+                fundSublabel.style.opacity = '';
+                intelligenceSublabel.style.opacity = '';
+            }, 500);
+        }
+        
+        // Start rotation after 2 seconds, then every 4 seconds
+        setTimeout(() => {
+            rotateSublabels();
+            setInterval(rotateSublabels, 4000);
+        }, 2000);
 
         // CAMP details animation with more variety
         function updateCampDetails() {
