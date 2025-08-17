@@ -319,21 +319,6 @@
             transition: height 2s ease;
         }
 
-        /* Corner Information */
-        .info-corner {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            z-index: 200;
-        }
-
-        .info-text {
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.5);
-        }
 
         /* Intelligence Feed Bar */
         .intelligence-feed {
@@ -471,52 +456,6 @@
         }
 
         /* Corner Metrics */
-        /* Sector Activity */
-        .sector-activity {
-            position: fixed;
-            left: 40px;
-            top: 40px;
-            width: 180px;
-            z-index: 50;
-        }
-
-        .sector-title {
-            font-size: 11px;
-            color: rgba(0, 0, 0, 0.5);
-            margin-bottom: 15px;
-            letter-spacing: 0.05em;
-        }
-
-        .sector-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sector-item {
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        .sector-name {
-            font-size: 10px;
-            color: rgba(0, 0, 0, 0.6);
-            margin-bottom: 4px;
-        }
-
-        .sector-bar {
-            height: 3px;
-            background: rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sector-fill {
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            transition: width 2s ease;
-        }
-
         .corner-metric {
             position: fixed;
             font-size: 11px;
@@ -683,42 +622,6 @@
     <!-- Grid Background -->
     <div class="grid-bg"></div>
 
-    <!-- Left Panel -->
-    <div class="sector-activity">
-        <div class="sector-title">SECTOR ACTIVITY</div>
-        <ul class="sector-list">
-            <li class="sector-item">
-                <div class="sector-name">CONSUMER</div>
-                <div class="sector-bar">
-                    <div class="sector-fill" style="width: 75%;"></div>
-                </div>
-            </li>
-            <li class="sector-item">
-                <div class="sector-name">ENTERPRISE</div>
-                <div class="sector-bar">
-                    <div class="sector-fill" style="width: 60%;"></div>
-                </div>
-            </li>
-            <li class="sector-item">
-                <div class="sector-name">FINTECH</div>
-                <div class="sector-bar">
-                    <div class="sector-fill" style="width: 85%;"></div>
-                </div>
-            </li>
-            <li class="sector-item">
-                <div class="sector-name">HEALTH</div>
-                <div class="sector-bar">
-                    <div class="sector-fill" style="width: 45%;"></div>
-                </div>
-            </li>
-            <li class="sector-item">
-                <div class="sector-name">DEEP TECH</div>
-                <div class="sector-bar">
-                    <div class="sector-fill" style="width: 30%;"></div>
-                </div>
-            </li>
-        </ul>
-    </div>
 
     <!-- Intelligence Feed -->
     <div class="intelligence-feed">
@@ -983,19 +886,6 @@
         setInterval(animateCAMP, 5000);
 
         // Status indicators (no fake metrics to update)
-
-        // Sector heat map animation
-        function updateSectorBars() {
-            const sectors = document.querySelectorAll('.sector-fill');
-            sectors.forEach(bar => {
-                const currentWidth = parseInt(bar.style.width);
-                const change = Math.floor(Math.random() * 10 - 5);
-                const newWidth = Math.max(20, Math.min(90, currentWidth + change));
-                bar.style.width = newWidth + '%';
-            });
-        }
-
-        setInterval(updateSectorBars, 6000);
         
         // Pattern Predictions rotation
         const patternPredictions = [
