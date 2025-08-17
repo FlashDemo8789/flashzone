@@ -471,6 +471,89 @@
         }
 
         /* Corner Metrics */
+        /* Intelligence Activity */
+        .intelligence-activity {
+            position: fixed;
+            left: 40px;
+            top: 180px;
+            width: 200px;
+            z-index: 50;
+        }
+
+        .intelligence-title {
+            font-size: 11px;
+            color: rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+            transition: opacity 0.5s ease;
+        }
+
+        .intelligence-content {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .intelligence-view {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .intelligence-view.active {
+            opacity: 1;
+        }
+
+        .opportunity-list,
+        .probability-list,
+        .velocity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .opportunity-item,
+        .probability-item,
+        .velocity-item {
+            margin-bottom: 14px;
+            font-size: 11px;
+            color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .opportunity-sector,
+        .probability-sector,
+        .velocity-sector {
+            flex: 1;
+        }
+
+        .opportunity-score,
+        .probability-rate,
+        .velocity-speed {
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .probability-rate.high {
+            color: rgba(0, 150, 0, 0.8);
+        }
+
+        .probability-rate.medium {
+            color: rgba(200, 100, 0, 0.8);
+        }
+
+        .probability-rate.low {
+            color: rgba(200, 0, 0, 0.8);
+        }
+
+        .velocity-trend {
+            font-size: 9px;
+            color: rgba(0, 0, 0, 0.4);
+            margin-left: 5px;
+        }
+
         .corner-metric {
             position: fixed;
             font-size: 11px;
@@ -484,6 +567,7 @@
             letter-spacing: 0.05em;
             color: rgba(0, 0, 0, 0.5);
             text-transform: none;
+            transition: opacity 0.3s ease;
         }
         
         .metric-status.pulse {
@@ -641,6 +725,114 @@
         <div class="info-text">Flash Intelligence</div>
     </div>
 
+    <!-- Left Panel - Rotating Intelligence Views -->
+    <div class="intelligence-activity">
+        <div class="intelligence-title" id="intelligence-title">OPPORTUNITY SCORING</div>
+        <div class="intelligence-content">
+            <!-- View A: Opportunity Scoring -->
+            <div class="intelligence-view active" id="opportunity-view">
+                <ul class="opportunity-list">
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">AI Infrastructure</span>
+                        <span class="opportunity-score">94</span>
+                    </li>
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">Developer Tools</span>
+                        <span class="opportunity-score">87</span>
+                    </li>
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">Climate Tech</span>
+                        <span class="opportunity-score">82</span>
+                    </li>
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">Embedded Finance</span>
+                        <span class="opportunity-score">76</span>
+                    </li>
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">Healthcare AI</span>
+                        <span class="opportunity-score">71</span>
+                    </li>
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">Supply Chain</span>
+                        <span class="opportunity-score">68</span>
+                    </li>
+                    <li class="opportunity-item">
+                        <span class="opportunity-sector">Web3 Infra</span>
+                        <span class="opportunity-score">42</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- View B: Success Probability -->
+            <div class="intelligence-view" id="probability-view">
+                <ul class="probability-list">
+                    <li class="probability-item">
+                        <span class="probability-sector">B2B SaaS</span>
+                        <span class="probability-rate high">42%</span>
+                    </li>
+                    <li class="probability-item">
+                        <span class="probability-sector">Developer Tools</span>
+                        <span class="probability-rate high">38%</span>
+                    </li>
+                    <li class="probability-item">
+                        <span class="probability-sector">FinTech</span>
+                        <span class="probability-rate medium">31%</span>
+                    </li>
+                    <li class="probability-item">
+                        <span class="probability-sector">Healthcare</span>
+                        <span class="probability-rate medium">28%</span>
+                    </li>
+                    <li class="probability-item">
+                        <span class="probability-sector">Marketplace</span>
+                        <span class="probability-rate medium">24%</span>
+                    </li>
+                    <li class="probability-item">
+                        <span class="probability-sector">Consumer</span>
+                        <span class="probability-rate low">18%</span>
+                    </li>
+                    <li class="probability-item">
+                        <span class="probability-sector">Hardware</span>
+                        <span class="probability-rate low">12%</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- View C: Funding Velocity -->
+            <div class="intelligence-view" id="velocity-view">
+                <ul class="velocity-list">
+                    <li class="velocity-item">
+                        <span class="velocity-sector">AI/ML</span>
+                        <span class="velocity-speed">14d<span class="velocity-trend">↓3d</span></span>
+                    </li>
+                    <li class="velocity-item">
+                        <span class="velocity-sector">Security</span>
+                        <span class="velocity-speed">21d<span class="velocity-trend">↑2d</span></span>
+                    </li>
+                    <li class="velocity-item">
+                        <span class="velocity-sector">FinTech</span>
+                        <span class="velocity-speed">28d<span class="velocity-trend">—</span></span>
+                    </li>
+                    <li class="velocity-item">
+                        <span class="velocity-sector">Climate</span>
+                        <span class="velocity-speed">35d<span class="velocity-trend">↓5d</span></span>
+                    </li>
+                    <li class="velocity-item">
+                        <span class="velocity-sector">BioTech</span>
+                        <span class="velocity-speed">42d<span class="velocity-trend">↑8d</span></span>
+                    </li>
+                    <li class="velocity-item">
+                        <span class="velocity-sector">EdTech</span>
+                        <span class="velocity-speed">61d<span class="velocity-trend">↑12d</span></span>
+                    </li>
+                    <li class="velocity-item">
+                        <span class="velocity-sector">Travel</span>
+                        <span class="velocity-speed">89d<span class="velocity-trend">↑21d</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Intelligence Feed -->
     <div class="intelligence-feed">
         <div class="feed-content" id="feedContent">
@@ -670,7 +862,7 @@
     </div>
 
     <div class="corner-metric bottom-left">
-        <div class="metric-status analyzing">Patterns Analyzing<span class="dots">...</span></div>
+        <div class="metric-status" id="bottom-status">142 startups monitoring</div>
     </div>
 
     <div class="corner-metric bottom-right">
@@ -905,18 +1097,113 @@
 
         // Status indicators (no fake metrics to update)
 
-        // Sector heat map animation
-        function updateSectorBars() {
-            const sectors = document.querySelectorAll('.sector-fill');
-            sectors.forEach(bar => {
-                const currentWidth = parseInt(bar.style.width);
-                const change = Math.floor(Math.random() * 10 - 5);
-                const newWidth = Math.max(20, Math.min(90, currentWidth + change));
-                bar.style.width = newWidth + '%';
-            });
+        // Intelligence views rotation
+        const intelligenceViews = [
+            { id: 'opportunity-view', title: 'OPPORTUNITY SCORING' },
+            { id: 'probability-view', title: 'SUCCESS PROBABILITY' },
+            { id: 'velocity-view', title: 'FUNDING VELOCITY' }
+        ];
+        
+        let currentViewIndex = 0;
+        
+        function rotateIntelligenceView() {
+            // Fade out current view
+            const currentView = document.getElementById(intelligenceViews[currentViewIndex].id);
+            const titleElement = document.getElementById('intelligence-title');
+            
+            currentView.classList.remove('active');
+            titleElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Update to next view
+                currentViewIndex = (currentViewIndex + 1) % intelligenceViews.length;
+                const nextView = document.getElementById(intelligenceViews[currentViewIndex].id);
+                
+                // Update title
+                titleElement.textContent = intelligenceViews[currentViewIndex].title;
+                
+                // Update data with slight variations
+                updateIntelligenceData(currentViewIndex);
+                
+                // Fade in new view
+                titleElement.style.opacity = '1';
+                nextView.classList.add('active');
+            }, 500);
         }
-
-        setInterval(updateSectorBars, 6000);
+        
+        function updateIntelligenceData(viewIndex) {
+            if (viewIndex === 0) {
+                // Update opportunity scores
+                const scores = document.querySelectorAll('.opportunity-score');
+                scores.forEach(score => {
+                    const current = parseInt(score.textContent);
+                    const change = Math.floor(Math.random() * 5 - 2);
+                    score.textContent = Math.max(10, Math.min(99, current + change));
+                });
+            } else if (viewIndex === 1) {
+                // Update success probabilities
+                const rates = document.querySelectorAll('.probability-rate');
+                rates.forEach(rate => {
+                    const current = parseInt(rate.textContent);
+                    const change = Math.floor(Math.random() * 3 - 1);
+                    const newRate = Math.max(5, Math.min(50, current + change));
+                    rate.textContent = newRate + '%';
+                    
+                    // Update color class
+                    rate.classList.remove('high', 'medium', 'low');
+                    if (newRate >= 35) rate.classList.add('high');
+                    else if (newRate >= 20) rate.classList.add('medium');
+                    else rate.classList.add('low');
+                });
+            } else if (viewIndex === 2) {
+                // Update funding velocities
+                const speeds = document.querySelectorAll('.velocity-speed');
+                speeds.forEach(speed => {
+                    const match = speed.textContent.match(/(\d+)d/);
+                    if (match) {
+                        const current = parseInt(match[1]);
+                        const change = Math.floor(Math.random() * 4 - 2);
+                        const newSpeed = Math.max(7, Math.min(120, current + change));
+                        const trend = speed.querySelector('.velocity-trend');
+                        if (trend) {
+                            if (change > 0) trend.textContent = '↑' + Math.abs(change) + 'd';
+                            else if (change < 0) trend.textContent = '↓' + Math.abs(change) + 'd';
+                            else trend.textContent = '—';
+                        }
+                        speed.childNodes[0].textContent = newSpeed + 'd';
+                    }
+                });
+            }
+        }
+        
+        // Rotate views every 10 seconds
+        setInterval(rotateIntelligenceView, 10000);
+        
+        // Bottom status rotation
+        const statusMessages = [
+            '142 startups monitoring',
+            '28 patterns detected',
+            '4 critical alerts',
+            '89% accuracy rate',
+            '12 new opportunities',
+            '6 exits predicted'
+        ];
+        
+        let currentStatusIndex = 0;
+        
+        function rotateBottomStatus() {
+            const statusElement = document.getElementById('bottom-status');
+            statusElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                currentStatusIndex = (currentStatusIndex + 1) % statusMessages.length;
+                statusElement.textContent = statusMessages[currentStatusIndex];
+                statusElement.style.opacity = '1';
+            }, 300);
+        }
+        
+        // Rotate status every 5 seconds
+        setInterval(rotateBottomStatus, 5000);
         
         // Pattern Predictions rotation
         const patternPredictions = [
