@@ -301,13 +301,6 @@
             z-index: 200;
         }
 
-        .camp-metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
         .camp-bar {
             width: 4px;
             height: 40px;
@@ -322,13 +315,6 @@
             width: 100%;
             background: #000;
             transition: height 2s ease;
-        }
-
-        .camp-label {
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            color: rgba(0, 0, 0, 0.6);
         }
 
         /* Corner Information */
@@ -519,39 +505,52 @@
             margin-top: 2px;
         }
 
-        /* Enhanced CAMP Display */
+        /* Enhanced CAMP Display - Integrated */
         .camp-display {
             position: fixed;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 40px;
-            z-index: 200;
-            align-items: flex-end;
-        }
-
-        .camp-details {
-            position: fixed;
-            bottom: 120px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 60px;
-            z-index: 190;
+            z-index: 200;
+            align-items: flex-end;
+        }
+
+        .camp-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
 
         .camp-detail {
             text-align: center;
-            font-size: 10px;
-            color: rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
         }
 
         .detail-value {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 300;
-            color: rgba(0, 0, 0, 0.7);
-            margin-bottom: 2px;
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 1;
+        }
+        
+        .detail-name {
+            font-size: 10px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 4px;
+            letter-spacing: 0.05em;
+        }
+        
+        .camp-letter {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: rgba(0, 0, 0, 0.6);
+            margin-top: 8px;
+            cursor: help;
         }
 
         /* Loading Animation */
@@ -758,51 +757,47 @@
         </div>
     </div>
 
-    <!-- Enhanced CAMP Details -->
-    <div class="camp-details">
-        <div class="camp-detail">
-            <div class="detail-value" id="capital-score">34</div>
-            <div>Capital: Burn Multiple × Efficiency × Runway Quality</div>
-        </div>
-        <div class="camp-detail">
-            <div class="detail-value" id="advantage-score">41</div>
-            <div>Advantage: Moat Depth × Network Effects × Defensibility</div>
-        </div>
-        <div class="camp-detail">
-            <div class="detail-value" id="market-score">28</div>
-            <div>Market: TAM Capture × Growth Velocity × Timing Score</div>
-        </div>
-        <div class="camp-detail">
-            <div class="detail-value" id="people-score">52</div>
-            <div>People: Execution Score × Team Leverage × Founder-Market Fit</div>
-        </div>
-    </div>
-
-    <!-- CAMP Display -->
+    <!-- CAMP Display Integrated -->
     <div class="camp-display">
         <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="capital-score">34</div>
+                <div class="detail-name">Capital</div>
+            </div>
             <div class="camp-bar">
                 <div class="camp-fill" id="c-fill"></div>
             </div>
-            <div class="camp-label" title="31 Capital Metrics (15 base + 16 calculated)">C</div>
+            <div class="camp-letter" title="Capital: Burn Multiple × Efficiency × Runway Quality&#10;31 metrics (15 base + 16 calculated)">C</div>
         </div>
         <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="advantage-score">41</div>
+                <div class="detail-name">Advantage</div>
+            </div>
             <div class="camp-bar">
                 <div class="camp-fill" id="a-fill"></div>
             </div>
-            <div class="camp-label" title="32 Advantage Metrics (16 base + 16 calculated)">A</div>
+            <div class="camp-letter" title="Advantage: Moat Depth × Network Effects × Defensibility&#10;32 metrics (16 base + 16 calculated)">A</div>
         </div>
         <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="market-score">28</div>
+                <div class="detail-name">Market</div>
+            </div>
             <div class="camp-bar">
                 <div class="camp-fill" id="m-fill"></div>
             </div>
-            <div class="camp-label" title="32 Market Metrics (16 base + 16 calculated)">M</div>
+            <div class="camp-letter" title="Market: TAM Capture × Growth Velocity × Timing Score&#10;32 metrics (16 base + 16 calculated)">M</div>
         </div>
         <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="people-score">52</div>
+                <div class="detail-name">People</div>
+            </div>
             <div class="camp-bar">
                 <div class="camp-fill" id="p-fill"></div>
             </div>
-            <div class="camp-label" title="31 People Metrics (16 base + 15 calculated)">P</div>
+            <div class="camp-letter" title="People: Execution Score × Team Leverage × Founder-Market Fit&#10;31 metrics (16 base + 15 calculated)">P</div>
         </div>
     </div>
 
