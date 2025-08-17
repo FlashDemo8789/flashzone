@@ -419,20 +419,37 @@
         }
 
         /* Portfolio Performance */
-        .portfolio-item {
-            margin-bottom: 15px;
+        .prediction-item {
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .prediction-item:last-child {
+            border-bottom: none;
+        }
+
+        .prediction-company {
+            color: rgba(0, 0, 0, 0.8);
             font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 3px;
         }
 
-        .portfolio-company {
-            color: rgba(0, 0, 0, 0.7);
-            font-weight: 400;
+        .prediction-match {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 11px;
+            margin-bottom: 2px;
         }
-
-        .portfolio-return {
-            color: rgba(0, 0, 0, 0.5);
+        
+        .prediction-outcome {
+            color: rgba(0, 0, 0, 0.4);
             font-size: 10px;
-            margin-top: 2px;
+            font-style: italic;
+        }
+        
+        #pattern-predictions {
+            transition: opacity 0.3s ease;
         }
 
         /* Corner Metrics */
@@ -676,32 +693,35 @@
         </div>
     </div>
 
-    <!-- Right Side Panel - Portfolio Performance -->
+    <!-- Right Side Panel - Pattern Predictions -->
     <div class="side-panel right">
-        <div class="panel-title">Recent Exits</div>
-        <div class="portfolio-item">
-            <div class="portfolio-company">DataSync → Salesforce</div>
-            <div class="portfolio-return">$450M • 8.2x return</div>
-        </div>
-        <div class="portfolio-item">
-            <div class="portfolio-company">CloudOps → AWS</div>
-            <div class="portfolio-return">$280M • 5.6x return</div>
-        </div>
-        <div class="portfolio-item">
-            <div class="portfolio-company">NeuralAPI → Nvidia</div>
-            <div class="portfolio-return">$1.2B • 12x return</div>
-        </div>
-        <div class="portfolio-item">
-            <div class="portfolio-company">FinFlow → Stripe</div>
-            <div class="portfolio-return">$180M • 3.8x return</div>
-        </div>
-        <div class="portfolio-item">
-            <div class="portfolio-company">SecureAuth → Okta</div>
-            <div class="portfolio-return">$320M • 4.5x return</div>
-        </div>
-        <div class="portfolio-item">
-            <div class="portfolio-company">DevTools Inc → Shutdown</div>
-            <div class="portfolio-return">$0 • 0x return</div>
+        <div class="panel-title">Pattern Predictions</div>
+        <div id="pattern-predictions">
+            <div class="prediction-item">
+                <div class="prediction-company">CloudSync • Vertical AI</div>
+                <div class="prediction-match">87% match → Databricks 2020</div>
+                <div class="prediction-outcome">Projected: $2B exit by 2027</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">DataForge • PLG Motion</div>
+                <div class="prediction-match">92% match → Snowflake 2019</div>
+                <div class="prediction-outcome">Tracking: Series B signals</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">NeuralAPI • API-First</div>
+                <div class="prediction-match">78% match → Twilio 2015</div>
+                <div class="prediction-outcome">Risk: Commoditization 18mo</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">PayFlow • Dev Tools</div>
+                <div class="prediction-match">83% match → Stripe 2014</div>
+                <div class="prediction-outcome">Next milestone: $10M ARR</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">MindBridge • Health AI</div>
+                <div class="prediction-match">71% match → Veeva 2011</div>
+                <div class="prediction-outcome">FDA approval critical path</div>
+            </div>
         </div>
     </div>
 
@@ -871,6 +891,59 @@
         }
 
         setInterval(updateSectorBars, 6000);
+        
+        // Pattern Predictions rotation
+        const patternPredictions = [
+            [
+                { company: 'CloudSync • Vertical AI', match: '87% match → Databricks 2020', outcome: 'Projected: $2B exit by 2027' },
+                { company: 'DataForge • PLG Motion', match: '92% match → Snowflake 2019', outcome: 'Tracking: Series B signals' },
+                { company: 'NeuralAPI • API-First', match: '78% match → Twilio 2015', outcome: 'Risk: Commoditization 18mo' },
+                { company: 'PayFlow • Dev Tools', match: '83% match → Stripe 2014', outcome: 'Next milestone: $10M ARR' },
+                { company: 'MindBridge • Health AI', match: '71% match → Veeva 2011', outcome: 'FDA approval critical path' }
+            ],
+            [
+                { company: 'StreamCore • Live Commerce', match: '89% match → Twitch 2011', outcome: 'Acquisition interest detected' },
+                { company: 'QuickBase • No-Code', match: '94% match → Airtable 2018', outcome: 'Projected: Series C in 6mo' },
+                { company: 'FleetMind • Logistics AI', match: '76% match → Convoy 2015', outcome: 'Warning: Unit economics weak' },
+                { company: 'SecureVault • Zero Trust', match: '81% match → Okta 2012', outcome: 'Enterprise traction strong' },
+                { company: 'EduFlow • EdTech SaaS', match: '68% match → Coursera 2014', outcome: 'Pivot recommended: B2B focus' }
+            ],
+            [
+                { company: 'FinanceOS • Embedded Fin', match: '91% match → Plaid 2016', outcome: 'Banking license advantage' },
+                { company: 'CodeStream • Dev Infra', match: '85% match → GitLab 2017', outcome: 'Open source strategy working' },
+                { company: 'GreenGrid • Climate Tech', match: '73% match → Opower 2009', outcome: 'Regulatory tailwinds strong' },
+                { company: 'VoiceAI • Conversational', match: '79% match → Twilio 2013', outcome: 'Platform play emerging' },
+                { company: 'MetricFlow • Analytics', match: '88% match → Amplitude 2016', outcome: 'Product-market fit achieved' }
+            ]
+        ];
+        
+        let currentPredictionSet = 0;
+        
+        function updatePredictions() {
+            const container = document.getElementById('pattern-predictions');
+            currentPredictionSet = (currentPredictionSet + 1) % patternPredictions.length;
+            const predictions = patternPredictions[currentPredictionSet];
+            
+            // Fade out
+            container.style.opacity = '0.3';
+            
+            setTimeout(() => {
+                // Update content
+                container.innerHTML = predictions.map(pred => `
+                    <div class="prediction-item">
+                        <div class="prediction-company">${pred.company}</div>
+                        <div class="prediction-match">${pred.match}</div>
+                        <div class="prediction-outcome">${pred.outcome}</div>
+                    </div>
+                `).join('');
+                
+                // Fade in
+                container.style.opacity = '1';
+            }, 300);
+        }
+        
+        // Update predictions every 15 seconds
+        setInterval(updatePredictions, 15000);
 
         // CAMP details animation with more variety
         function updateCampDetails() {
