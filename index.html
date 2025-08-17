@@ -471,80 +471,50 @@
         }
 
         /* Corner Metrics */
-        /* Intelligence Panel - Johnny Ive Design */
-        .intelligence-panel {
+        /* Sector Activity */
+        .sector-activity {
             position: fixed;
             left: 40px;
             top: 180px;
-            width: 220px;
+            width: 180px;
             z-index: 50;
         }
 
-        .intelligence-label {
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            color: rgba(0, 0, 0, 0.4);
-            margin-bottom: 24px;
-        }
-
-        .intelligence-metrics {
-            margin-bottom: 32px;
-        }
-
-        .metric-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 16px;
-            height: 20px;
-        }
-
-        .metric-name {
+        .sector-title {
             font-size: 11px;
-            color: rgba(0, 0, 0, 0.7);
-            width: 110px;
-            font-weight: 400;
+            color: rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+            letter-spacing: 0.05em;
         }
 
-        .metric-bar {
-            flex: 1;
-            height: 1px;
-            background: rgba(0, 0, 0, 0.08);
+        .sector-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sector-item {
+            margin-bottom: 10px;
             position: relative;
-            margin-right: 12px;
         }
 
-        .metric-fill {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 1px;
-            background: rgba(0, 0, 0, 0.3);
-            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .metric-value {
-            font-size: 11px;
-            color: rgba(0, 0, 0, 0.5);
-            width: 25px;
-            text-align: right;
-            font-weight: 300;
-        }
-
-        .intelligence-status {
+        .sector-name {
             font-size: 10px;
-            color: rgba(0, 0, 0, 0.35);
-            line-height: 1.6;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 4px;
         }
 
-        .status-line {
-            margin-bottom: 2px;
-            transition: opacity 0.3s ease;
+        .sector-bar {
+            height: 3px;
+            background: rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
         }
 
-        .status-number {
-            font-weight: 500;
-            color: rgba(0, 0, 0, 0.5);
+        .sector-fill {
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            transition: width 2s ease;
         }
 
         .corner-metric {
@@ -718,56 +688,41 @@
         <div class="info-text">Flash Intelligence</div>
     </div>
 
-    <!-- Left Panel - Johnny Ive Design -->
-    <div class="intelligence-panel">
-        <div class="intelligence-label">INTELLIGENCE</div>
-        
-        <div class="intelligence-metrics">
-            <div class="metric-row">
-                <span class="metric-name">AI Infrastructure</span>
-                <div class="metric-bar">
-                    <div class="metric-fill" id="ai-fill" style="width: 87%;"></div>
+    <!-- Left Panel -->
+    <div class="sector-activity">
+        <div class="sector-title">SECTOR ACTIVITY</div>
+        <ul class="sector-list">
+            <li class="sector-item">
+                <div class="sector-name">CONSUMER</div>
+                <div class="sector-bar">
+                    <div class="sector-fill" style="width: 75%;"></div>
                 </div>
-                <span class="metric-value" id="ai-value">87</span>
-            </div>
-            
-            <div class="metric-row">
-                <span class="metric-name">Developer Tools</span>
-                <div class="metric-bar">
-                    <div class="metric-fill" id="dev-fill" style="width: 74%;"></div>
+            </li>
+            <li class="sector-item">
+                <div class="sector-name">ENTERPRISE</div>
+                <div class="sector-bar">
+                    <div class="sector-fill" style="width: 60%;"></div>
                 </div>
-                <span class="metric-value" id="dev-value">74</span>
-            </div>
-            
-            <div class="metric-row">
-                <span class="metric-name">Climate Tech</span>
-                <div class="metric-bar">
-                    <div class="metric-fill" id="climate-fill" style="width: 62%;"></div>
+            </li>
+            <li class="sector-item">
+                <div class="sector-name">FINTECH</div>
+                <div class="sector-bar">
+                    <div class="sector-fill" style="width: 85%;"></div>
                 </div>
-                <span class="metric-value" id="climate-value">62</span>
-            </div>
-            
-            <div class="metric-row">
-                <span class="metric-name">FinTech</span>
-                <div class="metric-bar">
-                    <div class="metric-fill" id="fintech-fill" style="width: 51%;"></div>
+            </li>
+            <li class="sector-item">
+                <div class="sector-name">HEALTH</div>
+                <div class="sector-bar">
+                    <div class="sector-fill" style="width: 45%;"></div>
                 </div>
-                <span class="metric-value" id="fintech-value">51</span>
-            </div>
-            
-            <div class="metric-row">
-                <span class="metric-name">Healthcare</span>
-                <div class="metric-bar">
-                    <div class="metric-fill" id="health-fill" style="width: 43%;"></div>
+            </li>
+            <li class="sector-item">
+                <div class="sector-name">DEEP TECH</div>
+                <div class="sector-bar">
+                    <div class="sector-fill" style="width: 30%;"></div>
                 </div>
-                <span class="metric-value" id="health-value">43</span>
-            </div>
-        </div>
-        
-        <div class="intelligence-status">
-            <div class="status-line">Monitoring <span class="status-number" id="monitoring-count">142</span> startups</div>
-            <div class="status-line"><span class="status-number" id="signal-count">4</span> critical signals</div>
-        </div>
+            </li>
+        </ul>
     </div>
 
     <!-- Intelligence Feed -->
@@ -799,7 +754,7 @@
     </div>
 
     <div class="corner-metric bottom-left">
-        <div class="metric-status" id="bottom-status">142 startups monitoring</div>
+        <div class="metric-status analyzing">Patterns Analyzing<span class="dots">...</span></div>
     </div>
 
     <div class="corner-metric bottom-right">
@@ -1034,76 +989,18 @@
 
         // Status indicators (no fake metrics to update)
 
-        // Intelligence panel updates - Johnny Ive style (subtle, meaningful)
-        function updateIntelligenceMetrics() {
-            const metrics = [
-                { fill: 'ai-fill', value: 'ai-value', base: 87 },
-                { fill: 'dev-fill', value: 'dev-value', base: 74 },
-                { fill: 'climate-fill', value: 'climate-value', base: 62 },
-                { fill: 'fintech-fill', value: 'fintech-value', base: 51 },
-                { fill: 'health-fill', value: 'health-value', base: 43 }
-            ];
-            
-            metrics.forEach(metric => {
-                const fillElement = document.getElementById(metric.fill);
-                const valueElement = document.getElementById(metric.value);
-                
-                // Subtle variations, not random noise
-                const drift = Math.sin(Date.now() / 10000 + metric.base) * 3;
-                const newValue = Math.round(metric.base + drift);
-                
-                if (fillElement && valueElement) {
-                    fillElement.style.width = newValue + '%';
-                    valueElement.textContent = newValue;
-                }
+        // Sector heat map animation
+        function updateSectorBars() {
+            const sectors = document.querySelectorAll('.sector-fill');
+            sectors.forEach(bar => {
+                const currentWidth = parseInt(bar.style.width);
+                const change = Math.floor(Math.random() * 10 - 5);
+                const newWidth = Math.max(20, Math.min(90, currentWidth + change));
+                bar.style.width = newWidth + '%';
             });
-            
-            // Update monitoring counts occasionally
-            if (Math.random() < 0.1) {
-                const monitoringElement = document.getElementById('monitoring-count');
-                const signalElement = document.getElementById('signal-count');
-                
-                if (monitoringElement) {
-                    const current = parseInt(monitoringElement.textContent);
-                    monitoringElement.textContent = current + Math.floor(Math.random() * 3 - 1);
-                }
-                
-                if (signalElement && Math.random() < 0.05) {
-                    const current = parseInt(signalElement.textContent);
-                    const newCount = Math.max(0, Math.min(8, current + Math.floor(Math.random() * 3 - 1)));
-                    signalElement.textContent = newCount;
-                }
-            }
         }
-        
-        // Update every 15 seconds (not too frequent)
-        setInterval(updateIntelligenceMetrics, 15000);
-        
-        // Bottom status rotation
-        const statusMessages = [
-            '142 startups monitoring',
-            '28 patterns detected',
-            '4 critical alerts',
-            '89% accuracy rate',
-            '12 new opportunities',
-            '6 exits predicted'
-        ];
-        
-        let currentStatusIndex = 0;
-        
-        function rotateBottomStatus() {
-            const statusElement = document.getElementById('bottom-status');
-            statusElement.style.opacity = '0';
-            
-            setTimeout(() => {
-                currentStatusIndex = (currentStatusIndex + 1) % statusMessages.length;
-                statusElement.textContent = statusMessages[currentStatusIndex];
-                statusElement.style.opacity = '1';
-            }, 300);
-        }
-        
-        // Rotate status every 5 seconds
-        setInterval(rotateBottomStatus, 5000);
+
+        setInterval(updateSectorBars, 6000);
         
         // Pattern Predictions rotation
         const patternPredictions = [
