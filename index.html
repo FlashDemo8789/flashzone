@@ -351,10 +351,26 @@
             position: absolute;
             white-space: nowrap;
             line-height: 40px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 400;
             color: rgba(0, 0, 0, 0.7);
             animation: feedScroll 180s linear infinite;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feed-item {
+            margin: 0 20px;
+        }
+        
+        .feed-item.warning {
+            color: rgba(0, 0, 0, 0.5);
+            font-style: italic;
+        }
+        
+        .feed-separator {
+            color: rgba(0, 0, 0, 0.2);
+            margin: 0 5px;
         }
 
         @keyframes feedScroll {
@@ -626,15 +642,23 @@
     <!-- Intelligence Feed -->
     <div class="intelligence-feed">
         <div class="feed-content" id="feedContent">
-            🔍 Pattern detected: "Reverse Marketplace" matching Airbnb 2008 trajectory (92% confidence) • 
-            💡 CloudSync pivoted to vertical AI, +300% growth in 8 weeks • 
-            📈 DataForge reached $1M ARR using "Land & Expand" pattern from Slack 2014 • 
-            ⚠️ Warning: "Vanity Metrics Mirage" pattern active in 3 EdTech startups this week • 
-            🎯 NeuralAPI matched "API-First Growth" pattern → $12M Series A in 6 months • 
-            🔄 PayFlow following Stripe's "Developer Love" playbook (week 14 of 52) • 
-            📊 "Burn Multiple Recovery" pattern: 8 companies reduced burn by 40% using our framework • 
-            🚀 FleetOS exit to Google matched our "Strategic Acquihire" prediction (87% accuracy) • 
-            💰 Pattern success: Companies using "PLG with Enterprise Catch" raising 2.3x faster
+            <span class="feed-item">Pattern detected: Reverse Marketplace matching Airbnb 2008 trajectory (92% confidence)</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">CloudSync pivoted to vertical AI, +300% growth in 8 weeks</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">DataForge reached $1M ARR using Land & Expand pattern from Slack 2014</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item warning">Warning: Vanity Metrics Mirage pattern active in 3 EdTech startups</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">NeuralAPI matched API-First Growth pattern → $12M Series A in 6 months</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">PayFlow following Stripe's Developer Love playbook (week 14 of 52)</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">Burn Multiple Recovery pattern: 8 companies reduced burn by 40%</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">FleetOS exit to Google matched our Strategic Acquihire prediction (87% accuracy)</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">Pattern success: Companies using PLG with Enterprise Catch raising 2.3x faster</span>
         </div>
     </div>
 
@@ -1037,37 +1061,37 @@
         // Dynamic feed content updates
         const feedStories = [
             [
-                '🔍 Pattern detected: "Reverse Marketplace" matching Airbnb 2008 trajectory (92% confidence)',
-                '💡 CloudSync pivoted to vertical AI, +300% growth in 8 weeks',
-                '📈 DataForge reached $1M ARR using "Land & Expand" pattern from Slack 2014',
-                '⚠️ Warning: "Vanity Metrics Mirage" pattern active in 3 EdTech startups this week',
-                '🎯 NeuralAPI matched "API-First Growth" pattern → $12M Series A in 6 months',
-                '🔄 PayFlow following Stripe\'s "Developer Love" playbook (week 14 of 52)',
-                '📊 "Burn Multiple Recovery" pattern: 8 companies reduced burn by 40% using our framework',
-                '🚀 FleetOS exit to Google matched our "Strategic Acquihire" prediction (87% accuracy)',
-                '💰 Pattern success: Companies using "PLG with Enterprise Catch" raising 2.3x faster'
+                'Pattern detected: Reverse Marketplace matching Airbnb 2008 trajectory (92% confidence)',
+                'CloudSync pivoted to vertical AI, +300% growth in 8 weeks',
+                'DataForge reached $1M ARR using Land & Expand pattern from Slack 2014',
+                'Warning: Vanity Metrics Mirage pattern active in 3 EdTech startups this week',
+                'NeuralAPI matched API-First Growth pattern → $12M Series A in 6 months',
+                'PayFlow following Stripe\'s Developer Love playbook (week 14 of 52)',
+                'Burn Multiple Recovery pattern: 8 companies reduced burn by 40% using our framework',
+                'FleetOS exit to Google matched our Strategic Acquihire prediction (87% accuracy)',
+                'Pattern success: Companies using PLG with Enterprise Catch raising 2.3x faster'
             ],
             [
-                '🎯 Pattern match: "Bottom-Up SaaS" detected in 12 new startups this month',
-                '⚡ QuickBase burned $30k for 18 months, then hit $5M ARR (matches Basecamp 2004)',
-                '🔮 Predicted: 3 marketplace startups will pivot to SaaS within 60 days (78% confidence)',
-                '💎 "Product-Led Growth" pattern succeeding in 73% of dev tool startups',
-                '🏆 TeamSync matched Notion\'s 2018 trajectory → funded in 4 months',
-                '📱 "Mobile-First B2B" pattern emerging: 5x higher engagement than web-first',
-                '🎨 DesignHub following Figma\'s collaborative playbook (month 8 of 36)',
-                '⚙️ "Infrastructure Play" pattern: 15 startups building AI tooling layers',
-                '✨ Success story: CodeFlow used our "Open Source to Enterprise" pattern → $8M seed'
+                'Pattern match: Bottom-Up SaaS detected in 12 new startups this month',
+                'QuickBase burned $30k for 18 months, then hit $5M ARR (matches Basecamp 2004)',
+                'Predicted: 3 marketplace startups will pivot to SaaS within 60 days (78% confidence)',
+                'Product-Led Growth pattern succeeding in 73% of dev tool startups',
+                'TeamSync matched Notion\'s 2018 trajectory → funded in 4 months',
+                'Mobile-First B2B pattern emerging: 5x higher engagement than web-first',
+                'DesignHub following Figma\'s collaborative playbook (month 8 of 36)',
+                'Infrastructure Play pattern: 15 startups building AI tooling layers',
+                'Success story: CodeFlow used our Open Source to Enterprise pattern → $8M seed'
             ],
             [
-                '🚨 Alert: "Premature Scaling" pattern detected in 4 Series A companies',
-                '🎯 StreamCore matched Twitch 2011 metrics → acquisition interest from 3 companies',
-                '🔬 "Deep Tech Commercialization" pattern active in 8 biotech startups',
-                '💪 Survivor story: ByteStack cut burn 60% using "Default Alive" framework',
-                '🌟 "Creator Economy Infrastructure" pattern showing 85% funding success rate',
-                '📈 Growth hack: 6 companies using "Fake Door Testing" validated features in days',
-                '🎮 GameAPI following Unity\'s B2D2C model (quarter 3 of 12)',
-                '🏗️ "Vertical SaaS Roll-up" pattern: 4 companies acquiring competitors pre-Series B',
-                '🔥 Hot pattern: "AI Wrapper to Platform" journey matching Jasper.ai trajectory'
+                'Alert: Premature Scaling pattern detected in 4 Series A companies',
+                'StreamCore matched Twitch 2011 metrics → acquisition interest from 3 companies',
+                'Deep Tech Commercialization pattern active in 8 biotech startups',
+                'Survivor story: ByteStack cut burn 60% using Default Alive framework',
+                'Creator Economy Infrastructure pattern showing 85% funding success rate',
+                'Growth hack: 6 companies using Fake Door Testing validated features in days',
+                'GameAPI following Unity\'s B2D2C model (quarter 3 of 12)',
+                'Vertical SaaS Roll-up pattern: 4 companies acquiring competitors pre-Series B',
+                'Hot pattern: AI Wrapper to Platform journey matching Jasper.ai trajectory'
             ]
         ];
         
@@ -1076,10 +1100,14 @@
         function updateFeed() {
             const feedContent = document.getElementById('feedContent');
             currentFeedSet = (currentFeedSet + 1) % feedStories.length;
-            const newContent = feedStories[currentFeedSet].join(' • ');
+            const newContent = feedStories[currentFeedSet].map((story, index) => {
+                const isWarning = story.toLowerCase().includes('warning') || story.toLowerCase().includes('alert');
+                const className = isWarning ? 'feed-item warning' : 'feed-item';
+                return `<span class="${className}">${story}</span>`;
+            }).join('<span class="feed-separator"> — </span>');
             
             // Smooth transition
-            feedContent.style.opacity = '0.5';
+            feedContent.style.opacity = '0.3';
             setTimeout(() => {
                 feedContent.textContent = newContent;
                 feedContent.style.opacity = '1';
