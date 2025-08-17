@@ -490,18 +490,21 @@
 
         .intelligence-content {
             position: relative;
-            min-height: 200px;
+            min-height: 250px;
+            height: auto;
         }
 
         .intelligence-view {
             position: absolute;
             width: 100%;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         .intelligence-view.active {
             opacity: 1;
+            visibility: visible;
         }
 
         .opportunity-list,
@@ -521,6 +524,8 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
+            position: relative;
+            line-height: 1.4;
         }
 
         .opportunity-sector,
