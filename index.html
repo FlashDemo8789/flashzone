@@ -1,49 +1,1200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Flash Portal - TEST UPDATE</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash</title>
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        * {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fff;
+            color: #000;
+            overflow: hidden;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+            background-size: 100px 100px;
+            z-index: 1;
+            animation: gridShift 60s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+
+        /* Main Architecture */
+        .architecture {
+            position: relative;
+            width: 800px;
+            height: 400px;
+            z-index: 100;
+        }
+
+        /* Central Monolith */
+        .monolith {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 300px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.8) 20%,
+                rgba(0, 0, 0, 0.8) 80%,
+                transparent 100%);
+            z-index: 50;
+        }
+        
+        /* Central Fundability Score */
+        .fundability-score {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        .fundability-score:hover {
+            border-color: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 1);
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        
+        .score-value {
+            font-size: 36px;
+            font-weight: 100;
+            letter-spacing: -0.02em;
+            color: #000;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.6);
+            margin-top: 2px;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            font-weight: 100;
+            letter-spacing: 0.2em;
+            color: #000;
             text-align: center;
         }
-        .container {
-            padding: 2rem;
+
+        /* Geometric Portals */
+        .portal-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+
+        .portal {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
-        p {
-            font-size: 1.5rem;
-            opacity: 0.9;
+
+        /* Geometric Frames */
+        .frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            transition: all 0.6s ease;
         }
-        .time {
-            font-family: monospace;
-            background: rgba(0,0,0,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+
+        .frame.outer {
+            width: 100%;
+            height: 100%;
+            transform: rotate(0deg);
+        }
+
+        .frame.middle {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            transform: rotate(45deg);
+            animation: rotateFrame 20s linear infinite;
+        }
+
+        .frame.inner {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            transform: rotate(22.5deg);
+            animation: rotateFrame 30s linear infinite reverse;
+        }
+
+        @keyframes rotateFrame {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Center Points */
+        .center-point {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        /* Labels */
+        .portal-label {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .portal-sublabel {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 5px;
+            transition: opacity 0.5s ease;
+            min-height: 12px;
+        }
+
+        /* Hover Effects */
+        .portal:hover .frame {
+            border-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .portal:hover .frame.middle {
+            animation-duration: 5s;
+        }
+
+        .portal:hover .frame.inner {
+            animation-duration: 7s;
+        }
+
+        .portal:hover .portal-label {
+            color: #000;
+        }
+
+        .portal:hover .center-point {
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Connection Lines */
+        .connection {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0.1) 45%,
+                rgba(0, 0, 0, 0.1) 55%,
+                rgba(0, 0, 0, 0) 100%);
+            z-index: 10;
+        }
+
+        /* Data Stream */
+        .data-stream {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        .data-pulse {
+            position: absolute;
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(0, 0, 0, 0.8) 50%,
+                transparent 100%);
+            animation: dataFlow 3s linear infinite;
+        }
+
+        @keyframes dataFlow {
+            from { left: 30%; }
+            to { left: 70%; }
+        }
+
+        .data-pulse.reverse {
+            animation: dataFlowReverse 3s linear infinite;
+        }
+
+        @keyframes dataFlowReverse {
+            from { left: 70%; }
+            to { left: 30%; }
+        }
+
+        /* CAMP Indicators */
+        .camp-display {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 40px;
+            z-index: 200;
+        }
+
+        .camp-bar {
+            width: 4px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .camp-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #000;
+            transition: height 2s ease;
+        }
+
+
+        /* Corner Information */
+        .info-corner {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 200;
+        }
+
+        .info-text {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Intelligence Feed Bar */
+        .intelligence-feed {
+            position: fixed;
+            top: 120px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            z-index: 50;
+        }
+
+        .feed-content {
+            position: absolute;
+            white-space: nowrap;
+            line-height: 40px;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.7);
+            animation: feedScroll 180s linear infinite;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feed-item {
+            margin: 0 20px;
+        }
+        
+        .feed-item.warning {
+            color: rgba(0, 0, 0, 0.5);
+            font-style: italic;
+        }
+        
+        .feed-separator {
+            color: rgba(0, 0, 0, 0.2);
+            margin: 0 5px;
+        }
+
+        @keyframes feedScroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-200%); }
+        }
+
+        /* Side Panels */
+        .side-panel {
+            position: fixed;
+            top: 200px;
+            width: 200px;
+            z-index: 40;
+        }
+
+        .side-panel.left {
+            left: 60px;
+        }
+
+        .side-panel.right {
+            right: 60px;
+        }
+
+        .panel-title {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        /* Sector Heat Map */
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .sector-name {
+            color: rgba(0, 0, 0, 0.7);
+            font-weight: 400;
+        }
+
+        .sector-bar {
+            width: 80px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-left: 10px;
+        }
+
+        .sector-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            transition: width 2s ease;
+        }
+
+        /* Portfolio Performance */
+        .prediction-item {
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .prediction-item:last-child {
+            border-bottom: none;
+        }
+
+        .prediction-company {
+            color: rgba(0, 0, 0, 0.8);
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .prediction-match {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+        
+        .prediction-outcome {
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 10px;
+            font-style: italic;
+        }
+        
+        #pattern-predictions {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Corner Metrics */
+        .corner-metric {
+            position: fixed;
+            font-size: 11px;
+            color: rgba(0, 0, 0, 0.4);
+            z-index: 60;
+        }
+        
+        .metric-status {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: rgba(0, 0, 0, 0.5);
+            text-transform: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .metric-status.pulse {
+            animation: subtlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .metric-status.analyzing .dots {
             display: inline-block;
-            margin-top: 2rem;
+            animation: ellipsis 2s infinite;
+        }
+        
+        @keyframes ellipsis {
+            0% { opacity: 0; }
+            25% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            75% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .corner-metric.top-right {
+            top: 40px;
+            right: 40px;
+            text-align: right;
+        }
+
+        .corner-metric.bottom-left {
+            bottom: 140px;
+            left: 40px;
+        }
+
+        .corner-metric.bottom-right {
+            bottom: 140px;
+            right: 40px;
+            text-align: right;
+        }
+
+        .metric-value {
+            font-size: 16px;
+            font-weight: 200;
+            color: rgba(0, 0, 0, 0.8);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* Enhanced CAMP Display - Integrated */
+        .camp-display {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px;
+            z-index: 200;
+            align-items: flex-end;
+        }
+
+        .camp-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .camp-detail {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 1;
+        }
+        
+        .detail-name {
+            font-size: 10px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 4px;
+            letter-spacing: 0.05em;
+        }
+        
+        .camp-letter {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: rgba(0, 0, 0, 0.6);
+            margin-top: 8px;
+            cursor: help;
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeOut 0.5s ease 1s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .architecture {
+                width: 90vw;
+                height: 50vh;
+            }
+            
+            .portal {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .title {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 FLASH PORTAL UPDATE TEST</h1>
-        <p>If you can see this, the GitHub Pages update is working!</p>
-        <p>The new Flash Portal with Fund/Intelligence destinations is being deployed.</p>
-        <div class="time">Updated: <script>document.write(new Date().toLocaleString());</script></div>
+    <!-- Loading -->
+    <div class="loading"></div>
+
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Corner Info -->
+    <div class="info-corner">
+        <div class="info-text">Flash Intelligence</div>
     </div>
+
+
+    <!-- Intelligence Feed -->
+    <div class="intelligence-feed">
+        <div class="feed-content" id="feedContent">
+            <span class="feed-item">Discovery: Reverse Marketplace model matching Airbnb 2008 trajectory (92% confidence)</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">CloudSync pivoted to vertical AI, achieved 300% growth in 8 weeks</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">DataForge hits $1M ARR using Slack's 2014 expansion strategy</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item warning">Alert: Vanity metrics misleading 3 EdTech startups this week</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">NeuralAPI's API-first approach secured $12M Series A in 6 months</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">PayFlow executing Stripe's developer playbook (week 14 of 52)</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">Efficiency breakthrough: 8 companies cut burn by 40% using FLASH framework</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">FleetOS acquisition by Google validated our 87% accuracy prediction</span>
+            <span class="feed-separator">—</span>
+            <span class="feed-item">Market insight: PLG with enterprise features accelerates funding by 2.3x</span>
+        </div>
+    </div>
+
+    <!-- Corner Metrics -->
+    <div class="corner-metric top-right">
+        <div class="metric-status pulse">Intelligence Engine Active</div>
+    </div>
+
+    <div class="corner-metric bottom-left">
+        <div class="metric-status analyzing">Patterns Analyzing<span class="dots">...</span></div>
+    </div>
+
+    <div class="corner-metric bottom-right">
+        <span class="metric-value" id="nextFund">Q2 2025</span>
+        <div class="metric-label">Next Fund Closing</div>
+    </div>
+
+    <!-- Left Side Panel - Sector Heat Map -->
+    <div class="side-panel left">
+        <div class="panel-title">Sector Activity</div>
+        <div class="sector-item">
+            <span class="sector-name">AI/ML</span>
+            <div class="sector-bar">
+                <div class="sector-fill" style="width: 82%;"></div>
+            </div>
+        </div>
+        <div class="sector-item">
+            <span class="sector-name">Fintech</span>
+            <div class="sector-bar">
+                <div class="sector-fill" style="width: 67%;"></div>
+            </div>
+        </div>
+        <div class="sector-item">
+            <span class="sector-name">Climate</span>
+            <div class="sector-bar">
+                <div class="sector-fill" style="width: 45%;"></div>
+            </div>
+        </div>
+        <div class="sector-item">
+            <span class="sector-name">Biotech</span>
+            <div class="sector-bar">
+                <div class="sector-fill" style="width: 38%;"></div>
+            </div>
+        </div>
+        <div class="sector-item">
+            <span class="sector-name">Enterprise</span>
+            <div class="sector-bar">
+                <div class="sector-fill" style="width: 56%;"></div>
+            </div>
+        </div>
+        <div class="sector-item">
+            <span class="sector-name">Consumer</span>
+            <div class="sector-bar">
+                <div class="sector-fill" style="width: 29%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side Panel - Pattern Predictions -->
+    <div class="side-panel right">
+        <div class="panel-title">Intelligence Insights</div>
+        <div id="pattern-predictions">
+            <div class="prediction-item">
+                <div class="prediction-company">CloudSync • Vertical AI</div>
+                <div class="prediction-match">87% match → Databricks 2020</div>
+                <div class="prediction-outcome">Projected: $2B exit by 2027</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">DataForge • PLG Motion</div>
+                <div class="prediction-match">92% match → Snowflake 2019</div>
+                <div class="prediction-outcome">Tracking: Series B signals</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">NeuralAPI • API-First</div>
+                <div class="prediction-match">78% match → Twilio 2015</div>
+                <div class="prediction-outcome">Risk: Commoditization 18mo</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">PayFlow • Dev Tools</div>
+                <div class="prediction-match">83% match → Stripe 2014</div>
+                <div class="prediction-outcome">Next milestone: $10M ARR</div>
+            </div>
+            <div class="prediction-item">
+                <div class="prediction-company">MindBridge • Health AI</div>
+                <div class="prediction-match">71% match → Veeva 2011</div>
+                <div class="prediction-outcome">FDA approval critical path</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Architecture -->
+    <div class="architecture">
+        <!-- Title -->
+        <h1 class="title">FLASH</h1>
+
+        <!-- Central Monolith -->
+        <div class="monolith"></div>
+        
+        <!-- Central Fundability Score -->
+        <div class="fundability-score" id="fundability-container">
+            <div class="score-value" id="fundability-value">32</div>
+            <div class="score-label">Fundability</div>
+            <div class="threshold-indicator" id="percentile-indicator" style="font-size: 7px; opacity: 0.6; margin-top: 2px;">Below Average</div>
+        </div>
+
+        <!-- Connection Lines -->
+        <div class="connection"></div>
+
+        <!-- Data Stream -->
+        <div class="data-stream">
+            <div class="data-pulse"></div>
+            <div class="data-pulse reverse" style="animation-delay: 1.5s;"></div>
+        </div>
+
+        <!-- Portal Container -->
+        <div class="portal-container">
+            <!-- Fund Portal -->
+            <a href="https://flash.onl" class="portal">
+                <div class="frame outer"></div>
+                <div class="frame middle"></div>
+                <div class="frame inner"></div>
+                <div class="center-point"></div>
+                <div class="portal-label">
+                    Fund
+                    <div class="portal-sublabel" id="fund-sublabel">Pre-Seed to Series A</div>
+                </div>
+            </a>
+
+            <!-- Intelligence Portal -->
+            <a href="https://flashintelligence.co" class="portal">
+                <div class="frame outer"></div>
+                <div class="frame middle"></div>
+                <div class="frame inner"></div>
+                <div class="center-point"></div>
+                <div class="portal-label">
+                    Intelligence
+                    <div class="portal-sublabel" id="intelligence-sublabel">Pattern Recognition Engine</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- CAMP Display Integrated -->
+    <div class="camp-display">
+        <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="capital-score">34</div>
+                <div class="detail-name">Capital</div>
+            </div>
+            <div class="camp-bar">
+                <div class="camp-fill" id="c-fill"></div>
+            </div>
+            <div class="camp-letter" title="Capital: Burn Multiple × Efficiency × Runway Quality&#10;31 metrics (15 base + 16 calculated)">C</div>
+        </div>
+        <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="advantage-score">41</div>
+                <div class="detail-name">Advantage</div>
+            </div>
+            <div class="camp-bar">
+                <div class="camp-fill" id="a-fill"></div>
+            </div>
+            <div class="camp-letter" title="Advantage: Moat Depth × Network Effects × Defensibility&#10;32 metrics (16 base + 16 calculated)">A</div>
+        </div>
+        <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="market-score">28</div>
+                <div class="detail-name">Market</div>
+            </div>
+            <div class="camp-bar">
+                <div class="camp-fill" id="m-fill"></div>
+            </div>
+            <div class="camp-letter" title="Market: TAM Capture × Growth Velocity × Timing Score&#10;32 metrics (16 base + 16 calculated)">M</div>
+        </div>
+        <div class="camp-metric">
+            <div class="camp-detail">
+                <div class="detail-value" id="people-score">52</div>
+                <div class="detail-name">People</div>
+            </div>
+            <div class="camp-bar">
+                <div class="camp-fill" id="p-fill"></div>
+            </div>
+            <div class="camp-letter" title="People: Execution Score × Team Leverage × Founder-Market Fit&#10;31 metrics (16 base + 15 calculated)">P</div>
+        </div>
+    </div>
+
+    <script>
+        // CAMP Metrics Animation - now calls updateCampDetails for consistency
+        function animateCAMP() {
+            updateCampDetails();
+        }
+        
+        // Update Fundability Score and Percentile
+        function updateFundabilityScore(scores) {
+            const fundabilityElement = document.getElementById('fundability-value');
+            const percentileElement = document.getElementById('percentile-indicator');
+            const fundabilityScore = scores[0];
+            
+            // Update score with animation
+            fundabilityElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                fundabilityElement.textContent = fundabilityScore;
+                fundabilityElement.style.transform = 'scale(1)';
+                
+                // Update percentile indicator based on score
+                let percentileText;
+                let opacity;
+                
+                if (fundabilityScore >= 96) {
+                    percentileText = 'Top 5%';
+                    opacity = 1;
+                } else if (fundabilityScore >= 86) {
+                    percentileText = 'Top 10%';
+                    opacity = 0.9;
+                } else if (fundabilityScore >= 76) {
+                    percentileText = 'Top 20%';
+                    opacity = 0.8;
+                } else if (fundabilityScore >= 61) {
+                    percentileText = 'Above Average';
+                    opacity = 0.7;
+                } else if (fundabilityScore >= 41) {
+                    percentileText = 'Average Performance';
+                    opacity = 0.6;
+                } else if (fundabilityScore >= 21) {
+                    percentileText = 'Below Average';
+                    opacity = 0.5;
+                } else {
+                    percentileText = 'Bottom 20%';
+                    opacity = 0.4;
+                }
+                
+                percentileElement.textContent = percentileText;
+                percentileElement.style.opacity = opacity;
+            }, 150);
+        }
+
+        // Initial animation
+        setTimeout(animateCAMP, 500);
+
+        // Periodic updates
+        setInterval(animateCAMP, 5000);
+
+        // Status indicators (no fake metrics to update)
+        
+        // Pattern Predictions rotation
+        const patternPredictions = [
+            [
+                { company: 'CloudSync • Vertical AI', match: '87% match → Databricks 2020', outcome: 'Projected: $2B exit by 2027' },
+                { company: 'DataForge • PLG Motion', match: '92% match → Snowflake 2019', outcome: 'Tracking: Series B signals' },
+                { company: 'NeuralAPI • API-First', match: '78% match → Twilio 2015', outcome: 'Risk: Commoditization 18mo' },
+                { company: 'PayFlow • Dev Tools', match: '83% match → Stripe 2014', outcome: 'Next milestone: $10M ARR' },
+                { company: 'MindBridge • Health AI', match: '71% match → Veeva 2011', outcome: 'FDA approval critical path' }
+            ],
+            [
+                { company: 'StreamCore • Live Commerce', match: '89% match → Twitch 2011', outcome: 'Acquisition interest detected' },
+                { company: 'QuickBase • No-Code', match: '94% match → Airtable 2018', outcome: 'Projected: Series C in 6mo' },
+                { company: 'FleetMind • Logistics AI', match: '76% match → Convoy 2015', outcome: 'Warning: Unit economics weak' },
+                { company: 'SecureVault • Zero Trust', match: '81% match → Okta 2012', outcome: 'Enterprise traction strong' },
+                { company: 'EduFlow • EdTech SaaS', match: '68% match → Coursera 2014', outcome: 'Pivot recommended: B2B focus' }
+            ],
+            [
+                { company: 'FinanceOS • Embedded Fin', match: '91% match → Plaid 2016', outcome: 'Banking license advantage' },
+                { company: 'CodeStream • Dev Infra', match: '85% match → GitLab 2017', outcome: 'Open source strategy working' },
+                { company: 'GreenGrid • Climate Tech', match: '73% match → Opower 2009', outcome: 'Regulatory tailwinds strong' },
+                { company: 'VoiceAI • Conversational', match: '79% match → Twilio 2013', outcome: 'Platform play emerging' },
+                { company: 'MetricFlow • Analytics', match: '88% match → Amplitude 2016', outcome: 'Product-market fit achieved' }
+            ]
+        ];
+        
+        let currentPredictionSet = 0;
+        
+        function updatePredictions() {
+            const container = document.getElementById('pattern-predictions');
+            currentPredictionSet = (currentPredictionSet + 1) % patternPredictions.length;
+            const predictions = patternPredictions[currentPredictionSet];
+            
+            // Fade out
+            container.style.opacity = '0.3';
+            
+            setTimeout(() => {
+                // Update content
+                container.innerHTML = predictions.map(pred => `
+                    <div class="prediction-item">
+                        <div class="prediction-company">${pred.company}</div>
+                        <div class="prediction-match">${pred.match}</div>
+                        <div class="prediction-outcome">${pred.outcome}</div>
+                    </div>
+                `).join('');
+                
+                // Fade in
+                container.style.opacity = '1';
+            }, 300);
+        }
+        
+        // Update predictions every 15 seconds
+        setInterval(updatePredictions, 15000);
+        
+        // Portal sublabel rotation
+        const fundSublabels = [
+            'Pre-Seed to Series A',
+            'Founder-First Capital',
+            'Data-Driven Investing',
+            'Early Stage Ventures'
+        ];
+        
+        const intelligenceSublabels = [
+            'AI-Powered Analysis',
+            '126-Dimension Intelligence',
+            'Success Prediction Engine'
+        ];
+        
+        let sublabelIndex = 0;
+        
+        function rotateSublabels() {
+            const fundSublabel = document.getElementById('fund-sublabel');
+            const intelligenceSublabel = document.getElementById('intelligence-sublabel');
+            
+            // Fade out
+            fundSublabel.style.opacity = '0';
+            intelligenceSublabel.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Update text
+                sublabelIndex = (sublabelIndex + 1) % Math.max(fundSublabels.length, intelligenceSublabels.length);
+                
+                fundSublabel.textContent = fundSublabels[sublabelIndex % fundSublabels.length];
+                intelligenceSublabel.textContent = intelligenceSublabels[sublabelIndex % intelligenceSublabels.length];
+                
+                // Fade in
+                fundSublabel.style.opacity = '';
+                intelligenceSublabel.style.opacity = '';
+            }, 500);
+        }
+        
+        // Start rotation after 2 seconds, then every 4 seconds
+        setTimeout(() => {
+            rotateSublabels();
+            setInterval(rotateSublabels, 4000);
+        }, 2000);
+
+        // CAMP details animation with more variety
+        function updateCampDetails() {
+            const capitalScore = document.getElementById('capital-score');
+            const advantageScore = document.getElementById('advantage-score');
+            const marketScore = document.getElementById('market-score');
+            const peopleScore = document.getElementById('people-score');
+            
+            // 10% chance of exceptional or poor performance
+            const isExceptional = Math.random() < 0.1;
+            const isPoor = !isExceptional && Math.random() < 0.1;
+            
+            let capital, advantage, market, people;
+            
+            if (isExceptional) {
+                // Exceptional scores (top performers)
+                capital = 55 + Math.floor(Math.random() * 20);    // 55-75
+                advantage = 60 + Math.floor(Math.random() * 25);  // 60-85
+                market = 50 + Math.floor(Math.random() * 25);     // 50-75
+                people = 65 + Math.floor(Math.random() * 20);     // 65-85
+            } else if (isPoor) {
+                // Poor scores (struggling startups)
+                capital = 10 + Math.floor(Math.random() * 15);    // 10-25
+                advantage = 15 + Math.floor(Math.random() * 15);  // 15-30
+                market = 8 + Math.floor(Math.random() * 12);      // 8-20
+                people = 20 + Math.floor(Math.random() * 15);     // 20-35
+            } else {
+                // Normal distribution with more variety
+                capital = 15 + Math.floor(Math.random() * 50);    // 15-65
+                advantage = 20 + Math.floor(Math.random() * 50);  // 20-70
+                market = 10 + Math.floor(Math.random() * 50);     // 10-60
+                people = 25 + Math.floor(Math.random() * 50);     // 25-75
+            }
+            
+            // Update scores
+            capitalScore.textContent = capital;
+            advantageScore.textContent = advantage;
+            marketScore.textContent = market;
+            peopleScore.textContent = people;
+            
+            // Update bars to match
+            setTimeout(() => {
+                document.getElementById('c-fill').style.height = `${capital}%`;
+                document.getElementById('a-fill').style.height = `${advantage}%`;
+                document.getElementById('m-fill').style.height = `${market}%`;
+                document.getElementById('p-fill').style.height = `${people}%`;
+                
+                // Calculate and update fundability
+                const fundability = Math.round((capital + advantage + market + people) / 4);
+                updateFundabilityScore([fundability]);
+            }, 100);
+        }
+
+        setInterval(updateCampDetails, 8000);
+        
+        // Initialize fundability score
+        setTimeout(() => {
+            const initialFundability = Math.round((34 + 41 + 28 + 52) / 4);
+            updateFundabilityScore([initialFundability]);
+        }, 1000);
+        
+        // Add pulse effect for threshold achievement
+        function addThresholdPulse() {
+            const container = document.getElementById('fundability-container');
+            if (container && container.classList.contains('threshold-met')) {
+                container.style.animation = 'none';
+                setTimeout(() => {
+                    container.style.animation = 'thresholdPulse 2s ease-in-out';
+                }, 10);
+            }
+        }
+        
+        // CSS animation for threshold pulse
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes thresholdPulse {
+                0%, 100% { transform: translate(-50%, -50%) scale(1); }
+                50% { transform: translate(-50%, -50%) scale(1.02); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Trigger pulse occasionally when threshold is met
+        setInterval(() => {
+            const fundabilityValue = parseInt(document.getElementById('fundability-value').textContent);
+            if (fundabilityValue >= 75) {
+                addThresholdPulse();
+            }
+        }, 10000); // Every 10 seconds
+        
+        // Dynamic feed content updates
+        const feedStories = [
+            [
+                'Discovery: Reverse Marketplace model matching Airbnb 2008 trajectory (92% confidence)',
+                'CloudSync pivoted to vertical AI, achieved 300% growth in 8 weeks',
+                'DataForge hits $1M ARR using Slack\'s 2014 expansion strategy',
+                'Alert: Vanity metrics misleading 3 EdTech startups this week',
+                'NeuralAPI\'s API-first approach secured $12M Series A in 6 months',
+                'PayFlow executing Stripe\'s developer playbook (week 14 of 52)',
+                'Efficiency breakthrough: 8 companies cut burn by 40% using FLASH framework',
+                'FleetOS acquisition by Google validated our 87% accuracy prediction',
+                'Market insight: PLG with enterprise features accelerates funding by 2.3x'
+            ],
+            [
+                'Trend: Bottom-Up SaaS strategy adopted by 12 new startups this month',
+                'QuickBase burned $30k for 18 months, then hit $5M ARR (mirrors Basecamp 2004)',
+                'Forecast: 3 marketplace startups pivoting to SaaS within 60 days (78% confidence)',
+                'Market dynamics: Product-Led Growth succeeding in 73% of dev tool startups',
+                'TeamSync replicating Notion\'s 2018 growth trajectory, funded in 4 months',
+                'Mobile-First B2B gaining traction: 5x higher engagement than web-first',
+                'DesignHub implementing Figma\'s collaboration strategy (month 8 of 36)',
+                'Infrastructure opportunity: 15 startups building AI tooling layers',
+                'Success story: CodeFlow\'s open source strategy secured $8M seed funding'
+            ],
+            [
+                'Risk alert: Premature scaling identified in 4 Series A companies',
+                'StreamCore matching Twitch 2011 metrics, attracting 3 acquisition offers',
+                'Deep tech momentum: 8 biotech startups accelerating commercialization',
+                'Turnaround: ByteStack achieved 60% burn reduction using survival framework',
+                'Creator economy infrastructure achieving 85% funding success rate',
+                'Validation technique: 6 companies using fake door tests confirmed features in days',
+                'GameAPI implementing Unity\'s B2D2C strategy (quarter 3 of 12)',
+                'Consolidation trend: 4 companies acquiring competitors before Series B',
+                'Evolution: AI wrappers transforming into platforms, following Jasper\'s path'
+            ]
+        ];
+        
+        let currentFeedSet = 0;
+        
+        function updateFeed() {
+            const feedContent = document.getElementById('feedContent');
+            currentFeedSet = (currentFeedSet + 1) % feedStories.length;
+            const newContent = feedStories[currentFeedSet].map((story, index) => {
+                const isWarning = story.toLowerCase().includes('warning') || story.toLowerCase().includes('alert');
+                const className = isWarning ? 'feed-item warning' : 'feed-item';
+                return `<span class="${className}">${story}</span>`;
+            }).join('<span class="feed-separator"> — </span>');
+            
+            // Smooth transition
+            feedContent.style.opacity = '0.3';
+            setTimeout(() => {
+                feedContent.innerHTML = newContent;
+                feedContent.style.opacity = '1';
+            }, 500);
+        }
+        
+        // Update feed every 3 minutes
+        setInterval(updateFeed, 180000);
+
+        // Portal interaction
+        const portals = document.querySelectorAll('.portal');
+        
+        portals.forEach(portal => {
+            portal.addEventListener('mouseenter', () => {
+                // Accelerate frame rotation on hover
+                const frames = portal.querySelectorAll('.frame');
+                frames.forEach(frame => {
+                    frame.style.animationPlayState = 'running';
+                });
+            });
+
+            portal.addEventListener('mouseleave', () => {
+                const frames = portal.querySelectorAll('.frame');
+                frames.forEach(frame => {
+                    frame.style.animationPlayState = 'running';
+                });
+            });
+        });
+
+        // Parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+            
+            const monolith = document.querySelector('.monolith');
+            if (monolith) {
+                monolith.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+            }
+        });
+
+        // Add subtle pulse to center points
+        setInterval(() => {
+            const points = document.querySelectorAll('.center-point');
+            points.forEach((point, index) => {
+                setTimeout(() => {
+                    point.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    setTimeout(() => {
+                        point.style.transform = 'translate(-50%, -50%) scale(1)';
+                    }, 300);
+                }, index * 500);
+            });
+        }, 3000);
+    </script>
 </body>
 </html>
