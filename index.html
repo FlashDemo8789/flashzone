@@ -495,16 +495,18 @@
         }
 
         .intelligence-view {
-            position: absolute;
             width: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            display: none;
         }
 
         .intelligence-view.active {
-            opacity: 1;
-            visibility: visible;
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .opportunity-list,
@@ -1112,17 +1114,20 @@
         let currentViewIndex = 0;
         
         function rotateIntelligenceView() {
-            // Fade out current view
+            // Get current and next views
             const currentView = document.getElementById(intelligenceViews[currentViewIndex].id);
             const titleElement = document.getElementById('intelligence-title');
             
-            currentView.classList.remove('active');
+            // Update to next view
+            currentViewIndex = (currentViewIndex + 1) % intelligenceViews.length;
+            const nextView = document.getElementById(intelligenceViews[currentViewIndex].id);
+            
+            // Fade out title
             titleElement.style.opacity = '0';
             
             setTimeout(() => {
-                // Update to next view
-                currentViewIndex = (currentViewIndex + 1) % intelligenceViews.length;
-                const nextView = document.getElementById(intelligenceViews[currentViewIndex].id);
+                // Hide current, show next
+                currentView.classList.remove('active');
                 
                 // Update title
                 titleElement.textContent = intelligenceViews[currentViewIndex].title;
@@ -1130,10 +1135,12 @@
                 // Update data with slight variations
                 updateIntelligenceData(currentViewIndex);
                 
-                // Fade in new view
-                titleElement.style.opacity = '1';
+                // Show new view
                 nextView.classList.add('active');
-            }, 500);
+                
+                // Fade in title
+                titleElement.style.opacity = '1';
+            }, 300);
         }
         
         function updateIntelligenceData(viewIndex) {
