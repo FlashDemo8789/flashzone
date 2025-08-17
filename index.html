@@ -717,7 +717,7 @@
         <div class="fundability-score" id="fundability-container">
             <div class="score-value" id="fundability-value">32</div>
             <div class="score-label">Fundability</div>
-            <div class="threshold-indicator" style="font-size: 7px; opacity: 0.6; margin-top: 2px;">Top 15% Percentile</div>
+            <div class="threshold-indicator" id="percentile-indicator" style="font-size: 7px; opacity: 0.6; margin-top: 2px;">Below Average</div>
         </div>
 
         <!-- Connection Lines -->
@@ -802,37 +802,52 @@
     </div>
 
     <script>
-        // CAMP Metrics Animation
+        // CAMP Metrics Animation - now calls updateCampDetails for consistency
         function animateCAMP() {
-            const metrics = ['c', 'a', 'm', 'p'];
-            const scores = [];
-            
-            metrics.forEach((metric, index) => {
-                setTimeout(() => {
-                    const fill = document.getElementById(`${metric}-fill`);
-                    const height = 20 + Math.random() * 35; // Random height between 20-55% (realistic)
-                    fill.style.height = `${height}%`;
-                    scores.push(height);
-                    
-                    // Update fundability score when all CAMP metrics are updated
-                    if (scores.length === 4) {
-                        updateFundabilityScore(scores);
-                    }
-                }, index * 200);
-            });
+            updateCampDetails();
         }
         
-        // Update Fundability Score based on CAMP metrics
-        function updateFundabilityScore(campScores) {
+        // Update Fundability Score and Percentile
+        function updateFundabilityScore(scores) {
             const fundabilityElement = document.getElementById('fundability-value');
-            const avgScore = campScores.reduce((sum, score) => sum + score, 0) / campScores.length;
-            const fundabilityScore = Math.round(avgScore);
+            const percentileElement = document.getElementById('percentile-indicator');
+            const fundabilityScore = scores[0];
             
-            // Add subtle animation to score change
+            // Update score with animation
             fundabilityElement.style.transform = 'scale(1.1)';
             setTimeout(() => {
                 fundabilityElement.textContent = fundabilityScore;
                 fundabilityElement.style.transform = 'scale(1)';
+                
+                // Update percentile indicator based on score
+                let percentileText;
+                let opacity;
+                
+                if (fundabilityScore >= 96) {
+                    percentileText = 'Top 5%';
+                    opacity = 1;
+                } else if (fundabilityScore >= 86) {
+                    percentileText = 'Top 10%';
+                    opacity = 0.9;
+                } else if (fundabilityScore >= 76) {
+                    percentileText = 'Top 20%';
+                    opacity = 0.8;
+                } else if (fundabilityScore >= 61) {
+                    percentileText = 'Above Average';
+                    opacity = 0.7;
+                } else if (fundabilityScore >= 41) {
+                    percentileText = 'Average Performance';
+                    opacity = 0.6;
+                } else if (fundabilityScore >= 21) {
+                    percentileText = 'Below Average';
+                    opacity = 0.5;
+                } else {
+                    percentileText = 'Bottom 20%';
+                    opacity = 0.4;
+                }
+                
+                percentileElement.textContent = percentileText;
+                percentileElement.style.opacity = opacity;
             }, 150);
         }
 
@@ -857,32 +872,64 @@
 
         setInterval(updateSectorBars, 6000);
 
-        // CAMP details animation
+        // CAMP details animation with more variety
         function updateCampDetails() {
             const capitalScore = document.getElementById('capital-score');
             const advantageScore = document.getElementById('advantage-score');
             const marketScore = document.getElementById('market-score');
             const peopleScore = document.getElementById('people-score');
             
-            // Update with realistic Flash methodology ranges
-            // Capital: Focus on efficiency metrics (burn, runway, revenue)
-            capitalScore.textContent = 28 + Math.floor(Math.random() * 12); // 28-40 range (realistic)
+            // 10% chance of exceptional or poor performance
+            const isExceptional = Math.random() < 0.1;
+            const isPoor = !isExceptional && Math.random() < 0.1;
             
-            // Advantage: Competitive moats and differentiation
-            advantageScore.textContent = 35 + Math.floor(Math.random() * 15); // 35-50 range (realistic)
+            let capital, advantage, market, people;
             
-            // Market: Size, growth, and positioning
-            marketScore.textContent = 22 + Math.floor(Math.random() * 14); // 22-36 range (realistic)
+            if (isExceptional) {
+                // Exceptional scores (top performers)
+                capital = 55 + Math.floor(Math.random() * 20);    // 55-75
+                advantage = 60 + Math.floor(Math.random() * 25);  // 60-85
+                market = 50 + Math.floor(Math.random() * 25);     // 50-75
+                people = 65 + Math.floor(Math.random() * 20);     // 65-85
+            } else if (isPoor) {
+                // Poor scores (struggling startups)
+                capital = 10 + Math.floor(Math.random() * 15);    // 10-25
+                advantage = 15 + Math.floor(Math.random() * 15);  // 15-30
+                market = 8 + Math.floor(Math.random() * 12);      // 8-20
+                people = 20 + Math.floor(Math.random() * 15);     // 20-35
+            } else {
+                // Normal distribution with more variety
+                capital = 15 + Math.floor(Math.random() * 50);    // 15-65
+                advantage = 20 + Math.floor(Math.random() * 50);  // 20-70
+                market = 10 + Math.floor(Math.random() * 50);     // 10-60
+                people = 25 + Math.floor(Math.random() * 50);     // 25-75
+            }
             
-            // People: Team quality and execution capability
-            peopleScore.textContent = 45 + Math.floor(Math.random() * 18); // 45-63 range (realistic)
+            // Update scores
+            capitalScore.textContent = capital;
+            advantageScore.textContent = advantage;
+            marketScore.textContent = market;
+            peopleScore.textContent = people;
+            
+            // Update bars to match
+            setTimeout(() => {
+                document.getElementById('c-fill').style.height = `${capital}%`;
+                document.getElementById('a-fill').style.height = `${advantage}%`;
+                document.getElementById('m-fill').style.height = `${market}%`;
+                document.getElementById('p-fill').style.height = `${people}%`;
+                
+                // Calculate and update fundability
+                const fundability = Math.round((capital + advantage + market + people) / 4);
+                updateFundabilityScore([fundability]);
+            }, 100);
         }
 
-        setInterval(updateCampDetails, 7000);
+        setInterval(updateCampDetails, 8000);
         
         // Initialize fundability score
         setTimeout(() => {
-            updateFundabilityScore([34, 41, 28, 52]); // Initial CAMP scores (realistic)
+            const initialFundability = Math.round((34 + 41 + 28 + 52) / 4);
+            updateFundabilityScore([initialFundability]);
         }, 1000);
         
         // Add pulse effect for threshold achievement
