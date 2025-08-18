@@ -24,6 +24,16 @@
             justify-content: center;
             position: relative;
         }
+        
+        /* Mobile wrapper - invisible on desktop */
+        .mobile-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
         /* Grid Background */
         .grid-bg {
@@ -613,12 +623,11 @@
             }
         }
 
-        /* Mobile Responsive - Complete Rewrite */
+        /* Mobile Responsive - Simplified Approach */
         @media (max-width: 900px) {
-            /* Reset body for mobile scrolling */
+            /* Reset body for mobile - simplified */
             body {
-                overflow: visible !important;
-                overflow-x: hidden !important;
+                overflow: auto !important;
                 height: auto !important;
                 min-height: 100vh;
                 display: block !important;
@@ -626,83 +635,89 @@
                 justify-content: unset !important;
                 padding: 0;
                 margin: 0;
-                position: relative;
             }
 
-            /* Fix grid background for mobile */
+            /* Grid background */
             .grid-bg {
-                position: fixed;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 background-size: 50px 50px;
-                animation: none; /* Disable animation for performance */
-                -webkit-transform: translate3d(0,0,0); /* iOS Safari fix */
+                animation: none;
             }
 
-            /* Main container becomes scrollable */
-            .architecture {
-                position: relative !important;
-                width: 100% !important;
-                max-width: 100vw !important;
-                height: auto !important;
+            /* Main wrapper for mobile */
+            .mobile-wrapper {
+                position: relative;
+                width: 100%;
+                min-height: 100vh;
                 padding: 20px;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
+                box-sizing: border-box;
+            }
+
+            /* Main container */
+            .architecture {
+                position: static !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
                 z-index: auto !important;
             }
             
-            /* Title positioning fix */
+            /* Title */
             .title {
-                position: relative !important;
-                font-size: clamp(36px, 10vw, 60px);
+                position: static !important;
+                display: block !important;
+                width: 100% !important;
+                font-size: 48px;
                 letter-spacing: 0.2em;
-                margin: 20px 0;
+                margin: 30px 0 40px 0 !important;
                 text-align: center;
-                z-index: 10;
-            }
-            
-            /* Portal container - vertical layout */
-            .portal-container {
-                position: relative !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 40px;
-                width: 100%;
-                margin: 20px 0;
                 transform: none !important;
                 top: auto !important;
                 left: auto !important;
             }
             
-            /* Portal elements - touch-friendly */
-            .portal {
-                position: relative !important;
-                width: min(200px, 60vw) !important;
-                height: min(200px, 60vw) !important;
-                margin: 0 !important;
-                display: block;
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
+            /* Portal container */
+            .portal-container {
+                position: static !important;
+                display: block !important;
+                width: 100% !important;
+                margin: 40px 0 !important;
+                transform: none !important;
+                height: auto !important;
             }
             
-            /* Portal frames adjustment */
+            /* Portal elements */
+            .portal {
+                position: relative !important;
+                width: 180px !important;
+                height: 180px !important;
+                margin: 0 auto 80px auto !important;
+                display: block !important;
+            }
+            
+            .portal:last-child {
+                margin-bottom: 40px !important;
+            }
+            
+            /* Portal frames */
             .portal .frame {
-                width: 100% !important;
-                height: 100% !important;
-                position: absolute !important;
-                animation-duration: 20s !important; /* Slower for performance */
+                animation: none !important;
             }
             
             /* Portal labels */
             .portal-label {
                 position: absolute !important;
-                bottom: -50px !important;
+                bottom: -45px !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
                 font-size: 16px;
-                width: max-content;
+                width: 200px;
                 text-align: center;
             }
             
@@ -711,24 +726,23 @@
                 margin-top: 4px;
             }
             
-            /* Hide desktop-only elements */
+            /* Hide desktop elements */
             .monolith,
             .connection,
             .data-stream,
-            .side-panel {
+            .side-panel,
+            .intelligence-feed {
                 display: none !important;
             }
             
-            /* Fundability score - centered */
+            /* Fundability score */
             .fundability-score {
-                position: relative !important;
+                position: static !important;
                 width: 120px !important;
                 height: 120px !important;
                 margin: 40px auto !important;
-                top: auto !important;
-                left: auto !important;
                 transform: none !important;
-                z-index: 10 !important;
+                display: block !important;
             }
             
             .score-value {
@@ -743,83 +757,58 @@
                 font-size: 9px;
             }
             
-            /* Fixed elements to relative */
+            /* Info corner */
             .info-corner {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                padding: 20px;
-                text-align: center;
-                margin-bottom: 10px;
+                position: static !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+                transform: none !important;
             }
             
             .info-text {
                 font-size: 11px;
             }
             
-            /* Intelligence feed - simplified */
-            .intelligence-feed {
-                position: relative !important;
-                top: auto !important;
-                width: 100% !important;
-                height: 40px !important;
-                margin: 20px 0;
-                overflow: hidden !important;
-            }
-            
-            .feed-content {
-                font-size: 11px;
-                animation: none !important; /* Static on mobile */
-                padding: 0 20px;
-                white-space: normal;
-                line-height: 1.4;
-                height: auto;
-            }
-            
-            /* CAMP display - responsive grid */
+            /* CAMP display */
             .camp-display {
-                position: relative !important;
-                bottom: auto !important;
-                left: auto !important;
-                transform: none !important;
+                position: static !important;
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 20px !important;
-                width: 100% !important;
-                max-width: 300px !important;
-                margin: 40px auto !important;
-                padding: 0 20px;
-                z-index: 10 !important;
+                width: calc(100% - 40px) !important;
+                max-width: 280px !important;
+                margin: 40px auto 40px auto !important;
+                transform: none !important;
             }
             
             .camp-metric {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 10px;
-                min-height: 48px; /* Touch target */
+                gap: 8px;
             }
             
             .camp-detail {
-                display: flex !important;
-                flex-direction: column;
-                align-items: center;
+                display: block !important;
                 text-align: center;
             }
             
             .detail-value {
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: 600;
+                display: block;
             }
             
             .detail-name {
                 font-size: 10px;
                 text-transform: uppercase;
                 opacity: 0.7;
+                display: block;
+                margin-top: 2px;
             }
             
             .camp-bar {
-                width: 40px !important;
+                width: 60px !important;
                 height: 4px !important;
                 background: rgba(0,0,0,0.1);
                 border-radius: 2px;
@@ -829,7 +818,7 @@
             
             .camp-fill {
                 height: 100% !important;
-                width: var(--fill-width, 0%);
+                background: #000;
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -839,63 +828,27 @@
             .camp-letter {
                 font-size: 14px;
                 font-weight: 600;
-                margin-top: 5px;
-            }
-            
-            /* Hide complex animations on mobile */
-            @keyframes none {
-                0%, 100% { transform: none; }
-            }
-            
-            /* iOS Safari specific fixes */
-            * {
-                -webkit-tap-highlight-color: transparent;
-                -webkit-touch-callout: none;
-            }
-            
-            /* Fix for iOS bounce scrolling - Updated approach */
-            @supports (-webkit-touch-callout: none) {
-                /* iOS only */
-                body {
-                    position: fixed;
-                    width: 100%;
-                    -webkit-overflow-scrolling: touch;
-                }
-                
-                .architecture {
-                    overflow-y: auto;
-                    -webkit-overflow-scrolling: touch;
-                    height: 100vh;
-                    padding-bottom: env(safe-area-inset-bottom, 20px);
-                }
+                display: block;
             }
         }
         
         /* Small phones */
         @media (max-width: 480px) {
             .title {
-                font-size: clamp(28px, 12vw, 48px);
+                font-size: 36px !important;
                 letter-spacing: 0.1em;
-                margin: 15px 0;
-            }
-            
-            .architecture {
-                padding: 15px;
-                gap: 30px;
-            }
-            
-            .portal-container {
-                gap: 30px;
+                margin: 20px 0 30px 0 !important;
             }
             
             .portal {
-                width: min(160px, 50vw) !important;
-                height: min(160px, 50vw) !important;
+                width: 150px !important;
+                height: 150px !important;
+                margin: 0 auto 60px auto !important;
             }
             
             .portal-label {
                 font-size: 14px;
-                bottom: -40px !important;
+                bottom: -35px !important;
             }
             
             .portal-sublabel {
@@ -912,43 +865,29 @@
                 font-size: 28px;
             }
             
-            .intelligence-feed {
-                display: none !important; /* Hide on very small screens */
-            }
-            
             .camp-display {
-                grid-template-columns: repeat(2, 1fr) !important;
                 gap: 15px !important;
-                padding: 0 15px;
+                max-width: 240px !important;
             }
             
-            .camp-metric {
-                transform: scale(0.9);
+            .detail-value {
+                font-size: 18px;
             }
             
-            /* Safe area for notched devices */
-            .architecture {
-                padding-top: max(15px, env(safe-area-inset-top));
-                padding-bottom: max(15px, env(safe-area-inset-bottom));
+            .camp-bar {
+                width: 50px !important;
             }
         }
         
-        /* Landscape orientation fixes */
+        /* Landscape orientation */
         @media (max-width: 900px) and (orientation: landscape) {
-            .architecture {
-                gap: 20px;
+            .portal {
+                display: inline-block !important;
+                margin: 0 20px 60px 20px !important;
             }
             
             .portal-container {
-                flex-direction: row !important;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-            
-            .portal {
-                width: 150px !important;
-                height: 150px !important;
+                text-align: center;
             }
             
             .fundability-score {
@@ -957,21 +896,24 @@
             
             .camp-display {
                 grid-template-columns: repeat(4, 1fr) !important;
+                max-width: 400px !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Loading -->
-    <div class="loading"></div>
+    <!-- Mobile Wrapper -->
+    <div class="mobile-wrapper">
+        <!-- Loading -->
+        <div class="loading"></div>
 
-    <!-- Grid Background -->
-    <div class="grid-bg"></div>
+        <!-- Grid Background -->
+        <div class="grid-bg"></div>
 
-    <!-- Corner Info -->
-    <div class="info-corner">
-        <div class="info-text">Flash Intelligence</div>
-    </div>
+        <!-- Corner Info -->
+        <div class="info-corner">
+            <div class="info-text">Flash Intelligence</div>
+        </div>
 
 
     <!-- Intelligence Feed -->
@@ -1538,6 +1480,7 @@
             });
         }, 3000);
     </script>
+    </div><!-- End Mobile Wrapper -->
 </body>
 </html><!-- Force rebuild Mon Aug 18 09:10:18 JST 2025 -->
  
