@@ -623,49 +623,57 @@
             }
         }
 
-        /* Mobile Responsive - Simplified Approach */
+        /* Mobile Responsive - CSS-Only Viewport Fix */
         @media (max-width: 900px) {
-            /* Reset body for mobile - simplified */
+            /* Fix the viewport constraint issue */
             body {
-                overflow: auto !important;
-                height: auto !important;
+                height: auto !important; /* Remove 100vh constraint */
                 min-height: 100vh;
-                display: block !important;
-                align-items: unset !important;
-                justify-content: unset !important;
+                overflow: visible !important; /* Enable scrolling */
+                overflow-x: hidden !important; /* Prevent horizontal scroll */
+                display: block !important; /* Remove flex centering */
+                align-items: initial !important;
+                justify-content: initial !important;
                 padding: 0;
                 margin: 0;
+                position: relative !important;
             }
 
-            /* Grid background */
+            /* Mobile wrapper - allow natural flow */
+            .mobile-wrapper {
+                width: 100%;
+                height: auto !important; /* Remove height constraint */
+                display: block !important; /* Remove flex */
+                position: relative;
+                padding: 20px;
+                box-sizing: border-box;
+                min-height: 100vh;
+                align-items: initial !important;
+                justify-content: initial !important;
+            }
+
+            /* Grid background - make it follow content */
             .grid-bg {
-                position: absolute;
+                position: fixed; /* Keep as backdrop */
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 background-size: 50px 50px;
                 animation: none;
-            }
-
-            /* Main wrapper for mobile */
-            .mobile-wrapper {
-                position: relative;
-                width: 100%;
-                min-height: 100vh;
-                padding: 20px;
-                box-sizing: border-box;
+                z-index: 0;
             }
 
             /* Main container */
             .architecture {
-                position: static !important;
+                position: relative !important;
                 width: 100% !important;
                 height: auto !important;
-                margin: 0 !important;
-                padding: 0 !important;
+                margin: 0 0 40px 0 !important;
+                padding: 40px 20px !important;
                 display: block !important;
-                z-index: auto !important;
+                z-index: 1 !important;
+                box-sizing: border-box;
             }
             
             /* Title */
@@ -731,18 +739,27 @@
             .connection,
             .data-stream,
             .side-panel,
-            .intelligence-feed {
+            .intelligence-feed,
+            .loading {
                 display: none !important;
+            }
+            
+            /* Ensure proper content order on mobile */
+            .mobile-wrapper > * {
+                position: relative !important;
+                z-index: 1;
             }
             
             /* Fundability score */
             .fundability-score {
-                position: static !important;
+                position: relative !important;
                 width: 120px !important;
                 height: 120px !important;
                 margin: 40px auto !important;
                 transform: none !important;
                 display: block !important;
+                left: auto !important;
+                top: auto !important;
             }
             
             .score-value {
