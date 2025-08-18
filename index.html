@@ -613,20 +613,181 @@
             }
         }
 
-        /* Responsive */
+        /* Responsive - Enhanced for Mobile */
         @media (max-width: 900px) {
+            body {
+                overflow-x: hidden;
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
+                padding: 20px 0;
+            }
+
             .architecture {
                 width: 90vw;
-                height: 50vh;
-            }
-            
-            .portal {
-                width: 200px;
-                height: 200px;
+                height: auto;
+                min-height: 600px;
+                margin: 60px auto;
             }
             
             .title {
+                font-size: 48px;
+                letter-spacing: 0.3em;
+                top: 20px;
+            }
+            
+            .portal-container {
+                flex-direction: column;
+                gap: 60px;
+                top: 120px;
+                position: relative;
+                transform: none;
+            }
+            
+            .portal {
+                width: 180px;
+                height: 180px;
+                position: relative;
+                margin: 0 auto;
+            }
+            
+            .portal-label {
+                bottom: -45px;
+                font-size: 16px;
+            }
+            
+            .monolith {
+                display: none;
+            }
+            
+            .connection, .data-stream {
+                display: none;
+            }
+            
+            .fundability-score {
+                width: 100px;
+                height: 100px;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 40px auto;
+            }
+            
+            .score-value {
+                font-size: 28px;
+            }
+            
+            .score-label {
+                font-size: 9px;
+            }
+            
+            .side-panel {
+                display: none;
+            }
+            
+            .info-corner {
+                top: 20px;
+                left: 20px;
+                font-size: 10px;
+            }
+            
+            .intelligence-feed {
+                top: 70px;
+                height: 30px;
+            }
+            
+            .feed-content {
+                font-size: 10px;
+                line-height: 30px;
+            }
+            
+            .camp-display {
+                position: relative;
+                bottom: auto;
+                margin: 40px auto 20px;
+                gap: 20px;
+                flex-wrap: wrap;
+                width: 90%;
+                justify-content: center;
+            }
+            
+            .camp-metric {
+                margin: 0 10px;
+            }
+            
+            .camp-bar {
+                width: 3px;
+                height: 30px;
+            }
+            
+            .camp-letter {
+                font-size: 16px;
+            }
+            
+            .camp-detail {
+                display: none;
+            }
+            
+            .grid-bg {
+                background-size: 50px 50px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
                 font-size: 36px;
+                letter-spacing: 0.2em;
+            }
+            
+            .architecture {
+                margin: 40px auto;
+                min-height: 500px;
+            }
+            
+            .portal-container {
+                top: 80px;
+                gap: 40px;
+            }
+            
+            .portal {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .portal-label {
+                font-size: 14px;
+                bottom: -35px;
+            }
+            
+            .portal-sublabel {
+                font-size: 8px;
+            }
+            
+            .fundability-score {
+                width: 80px;
+                height: 80px;
+                margin: 30px auto;
+            }
+            
+            .score-value {
+                font-size: 22px;
+            }
+            
+            .camp-display {
+                margin: 30px auto 10px;
+            }
+            
+            .percentile-indicator {
+                font-size: 7px;
+            }
+            
+            .info-text {
+                font-size: 9px;
+            }
+            
+            .intelligence-feed {
+                display: none;
             }
         }
     </style>
