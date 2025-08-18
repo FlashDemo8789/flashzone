@@ -613,181 +613,350 @@
             }
         }
 
-        /* Responsive - Enhanced for Mobile */
+        /* Mobile Responsive - Complete Rewrite */
         @media (max-width: 900px) {
+            /* Reset body for mobile scrolling */
             body {
-                overflow-x: hidden;
-                overflow-y: auto;
-                height: auto;
+                overflow: visible !important;
+                overflow-x: hidden !important;
+                height: auto !important;
                 min-height: 100vh;
-                padding: 20px 0;
+                display: block !important;
+                align-items: unset !important;
+                justify-content: unset !important;
+                padding: 0;
+                margin: 0;
+                position: relative;
             }
 
+            /* Fix grid background for mobile */
+            .grid-bg {
+                position: fixed;
+                background-size: 50px 50px;
+                animation: none; /* Disable animation for performance */
+                -webkit-transform: translate3d(0,0,0); /* iOS Safari fix */
+            }
+
+            /* Main container becomes scrollable */
             .architecture {
-                width: 90vw;
-                height: auto;
-                min-height: 600px;
-                margin: 60px auto;
+                position: relative !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+                height: auto !important;
+                padding: 20px;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                z-index: auto !important;
             }
             
+            /* Title positioning fix */
             .title {
-                font-size: 48px;
-                letter-spacing: 0.3em;
-                top: 20px;
+                position: relative !important;
+                font-size: clamp(36px, 10vw, 60px);
+                letter-spacing: 0.2em;
+                margin: 20px 0;
+                text-align: center;
+                z-index: 10;
+            }
+            
+            /* Portal container - vertical layout */
+            .portal-container {
+                position: relative !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 40px;
+                width: 100%;
+                margin: 20px 0;
+                transform: none !important;
+                top: auto !important;
+                left: auto !important;
+            }
+            
+            /* Portal elements - touch-friendly */
+            .portal {
+                position: relative !important;
+                width: min(200px, 60vw) !important;
+                height: min(200px, 60vw) !important;
+                margin: 0 !important;
+                display: block;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            
+            /* Portal frames adjustment */
+            .portal .frame {
+                width: 100% !important;
+                height: 100% !important;
+                position: absolute !important;
+                animation-duration: 20s !important; /* Slower for performance */
+            }
+            
+            /* Portal labels */
+            .portal-label {
+                position: absolute !important;
+                bottom: -50px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                font-size: 16px;
+                width: max-content;
+                text-align: center;
+            }
+            
+            .portal-sublabel {
+                font-size: 10px;
+                margin-top: 4px;
+            }
+            
+            /* Hide desktop-only elements */
+            .monolith,
+            .connection,
+            .data-stream,
+            .side-panel {
+                display: none !important;
+            }
+            
+            /* Fundability score - centered */
+            .fundability-score {
+                position: relative !important;
+                width: 120px !important;
+                height: 120px !important;
+                margin: 40px auto !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                z-index: 10 !important;
+            }
+            
+            .score-value {
+                font-size: 32px;
+            }
+            
+            .score-label {
+                font-size: 10px;
+            }
+            
+            .percentile-indicator {
+                font-size: 9px;
+            }
+            
+            /* Fixed elements to relative */
+            .info-corner {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                padding: 20px;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .info-text {
+                font-size: 11px;
+            }
+            
+            /* Intelligence feed - simplified */
+            .intelligence-feed {
+                position: relative !important;
+                top: auto !important;
+                width: 100% !important;
+                height: 40px !important;
+                margin: 20px 0;
+                overflow: hidden !important;
+            }
+            
+            .feed-content {
+                font-size: 11px;
+                animation: none !important; /* Static on mobile */
+                padding: 0 20px;
+                white-space: normal;
+                line-height: 1.4;
+                height: auto;
+            }
+            
+            /* CAMP display - responsive grid */
+            .camp-display {
+                position: relative !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: none !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px !important;
+                width: 100% !important;
+                max-width: 300px !important;
+                margin: 40px auto !important;
+                padding: 0 20px;
+                z-index: 10 !important;
+            }
+            
+            .camp-metric {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                min-height: 48px; /* Touch target */
+            }
+            
+            .camp-detail {
+                display: flex !important;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .detail-value {
+                font-size: 18px;
+                font-weight: 600;
+            }
+            
+            .detail-name {
+                font-size: 10px;
+                text-transform: uppercase;
+                opacity: 0.7;
+            }
+            
+            .camp-bar {
+                width: 40px !important;
+                height: 4px !important;
+                background: rgba(0,0,0,0.1);
+                border-radius: 2px;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .camp-fill {
+                height: 100% !important;
+                width: var(--fill-width, 0%);
+                position: absolute;
+                left: 0;
+                top: 0;
+                transition: width 1s ease;
+            }
+            
+            .camp-letter {
+                font-size: 14px;
+                font-weight: 600;
+                margin-top: 5px;
+            }
+            
+            /* Hide complex animations on mobile */
+            @keyframes none {
+                0%, 100% { transform: none; }
+            }
+            
+            /* iOS Safari specific fixes */
+            * {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+            }
+            
+            /* Fix for iOS bounce scrolling - Updated approach */
+            @supports (-webkit-touch-callout: none) {
+                /* iOS only */
+                body {
+                    position: fixed;
+                    width: 100%;
+                    -webkit-overflow-scrolling: touch;
+                }
+                
+                .architecture {
+                    overflow-y: auto;
+                    -webkit-overflow-scrolling: touch;
+                    height: 100vh;
+                    padding-bottom: env(safe-area-inset-bottom, 20px);
+                }
+            }
+        }
+        
+        /* Small phones */
+        @media (max-width: 480px) {
+            .title {
+                font-size: clamp(28px, 12vw, 48px);
+                letter-spacing: 0.1em;
+                margin: 15px 0;
+            }
+            
+            .architecture {
+                padding: 15px;
+                gap: 30px;
             }
             
             .portal-container {
-                flex-direction: column;
-                gap: 60px;
-                top: 120px;
-                position: relative;
-                transform: none;
+                gap: 30px;
             }
             
             .portal {
-                width: 180px;
-                height: 180px;
-                position: relative;
-                margin: 0 auto;
+                width: min(160px, 50vw) !important;
+                height: min(160px, 50vw) !important;
             }
             
             .portal-label {
-                bottom: -45px;
-                font-size: 16px;
+                font-size: 14px;
+                bottom: -40px !important;
             }
             
-            .monolith {
-                display: none;
-            }
-            
-            .connection, .data-stream {
-                display: none;
+            .portal-sublabel {
+                font-size: 9px;
             }
             
             .fundability-score {
-                width: 100px;
-                height: 100px;
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                margin: 40px auto;
+                width: 100px !important;
+                height: 100px !important;
+                margin: 30px auto !important;
             }
             
             .score-value {
                 font-size: 28px;
             }
             
-            .score-label {
-                font-size: 9px;
-            }
-            
-            .side-panel {
-                display: none;
-            }
-            
-            .info-corner {
-                top: 20px;
-                left: 20px;
-                font-size: 10px;
-            }
-            
             .intelligence-feed {
-                top: 70px;
-                height: 30px;
-            }
-            
-            .feed-content {
-                font-size: 10px;
-                line-height: 30px;
+                display: none !important; /* Hide on very small screens */
             }
             
             .camp-display {
-                position: relative;
-                bottom: auto;
-                margin: 40px auto 20px;
-                gap: 20px;
-                flex-wrap: wrap;
-                width: 90%;
-                justify-content: center;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
+                padding: 0 15px;
             }
             
             .camp-metric {
-                margin: 0 10px;
+                transform: scale(0.9);
             }
             
-            .camp-bar {
-                width: 3px;
-                height: 30px;
-            }
-            
-            .camp-letter {
-                font-size: 16px;
-            }
-            
-            .camp-detail {
-                display: none;
-            }
-            
-            .grid-bg {
-                background-size: 50px 50px;
+            /* Safe area for notched devices */
+            .architecture {
+                padding-top: max(15px, env(safe-area-inset-top));
+                padding-bottom: max(15px, env(safe-area-inset-bottom));
             }
         }
         
-        @media (max-width: 480px) {
-            .title {
-                font-size: 36px;
-                letter-spacing: 0.2em;
-            }
-            
+        /* Landscape orientation fixes */
+        @media (max-width: 900px) and (orientation: landscape) {
             .architecture {
-                margin: 40px auto;
-                min-height: 500px;
+                gap: 20px;
             }
             
             .portal-container {
-                top: 80px;
-                gap: 40px;
+                flex-direction: row !important;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 20px;
             }
             
             .portal {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .portal-label {
-                font-size: 14px;
-                bottom: -35px;
-            }
-            
-            .portal-sublabel {
-                font-size: 8px;
+                width: 150px !important;
+                height: 150px !important;
             }
             
             .fundability-score {
-                width: 80px;
-                height: 80px;
-                margin: 30px auto;
-            }
-            
-            .score-value {
-                font-size: 22px;
+                margin: 20px auto !important;
             }
             
             .camp-display {
-                margin: 30px auto 10px;
-            }
-            
-            .percentile-indicator {
-                font-size: 7px;
-            }
-            
-            .info-text {
-                font-size: 9px;
-            }
-            
-            .intelligence-feed {
-                display: none;
+                grid-template-columns: repeat(4, 1fr) !important;
             }
         }
     </style>
@@ -1206,10 +1375,22 @@
             
             // Update bars to match
             setTimeout(() => {
-                document.getElementById('c-fill').style.height = `${capital}%`;
-                document.getElementById('a-fill').style.height = `${advantage}%`;
-                document.getElementById('m-fill').style.height = `${market}%`;
-                document.getElementById('p-fill').style.height = `${people}%`;
+                // Check if mobile
+                const isMobile = window.innerWidth <= 900;
+                
+                if (isMobile) {
+                    // On mobile, use width with CSS custom properties
+                    document.getElementById('c-fill').style.setProperty('--fill-width', `${capital}%`);
+                    document.getElementById('a-fill').style.setProperty('--fill-width', `${advantage}%`);
+                    document.getElementById('m-fill').style.setProperty('--fill-width', `${market}%`);
+                    document.getElementById('p-fill').style.setProperty('--fill-width', `${people}%`);
+                } else {
+                    // On desktop, use height as before
+                    document.getElementById('c-fill').style.height = `${capital}%`;
+                    document.getElementById('a-fill').style.height = `${advantage}%`;
+                    document.getElementById('m-fill').style.height = `${market}%`;
+                    document.getElementById('p-fill').style.height = `${people}%`;
+                }
                 
                 // Calculate and update fundability
                 const fundability = Math.round((capital + advantage + market + people) / 4);
